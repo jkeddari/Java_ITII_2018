@@ -96,7 +96,7 @@ public class MainWindow extends JFrame{
         panneauList=new JPanel();
         panneauMois=new JPanel();
         panneauSemaine=new JPanel();
-        
+
 
         mainPanel.add(choix_vue);
         //mainPanel.add(panneauSemaine);
