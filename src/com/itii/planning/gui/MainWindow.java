@@ -21,7 +21,9 @@ public class MainWindow extends JFrame{
     private JComboBox choix_vue;
 
     private JPanel panneauList, panneauSemaine, panneauMois;
+    private JPanel ButtonZone;
 
+    private JButton b_creer,b_editer,b_marquer,b_dupliquer,b_supprimer;
 
 
     public static MainWindow getInstance(){
@@ -86,6 +88,9 @@ public class MainWindow extends JFrame{
         menuBar.add(vue);
         menuBar.add(aide);
 
+        /*********************************/
+
+
 
         choix_vue=new JComboBox();
         panneauList=new JPanel();
@@ -94,7 +99,24 @@ public class MainWindow extends JFrame{
         
 
         mainPanel.add(choix_vue);
+        //mainPanel.add(panneauSemaine);
+        //mainPanel.add(panneauMois);
+        //mainPanel.add(panneauList)
 
+
+        ButtonZone=new JPanel();
+
+        b_creer=new JButton();
+        b_dupliquer=new JButton();
+        b_editer=new JButton();
+        b_marquer=new JButton();
+        b_supprimer=new JButton();
+
+        ButtonZone.add(b_creer);
+        ButtonZone.add(b_dupliquer);
+        ButtonZone.add(b_editer);
+        ButtonZone.add(b_marquer);
+        ButtonZone.add(b_supprimer);
 
         setJMenuBar(menuBar);
         setContentPane(mainPanel);
