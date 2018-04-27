@@ -91,32 +91,52 @@ public class MainWindow extends JFrame{
         /*********************************/
 
 
+        String[] VueList = { "Liste", "Semaine", "Mois"};
 
-        choix_vue=new JComboBox();
+        choix_vue=new JComboBox(VueList);
+        JLabel label_choix_vue=new JLabel("Vue : ");
+
+
+        JPanel affichage_planning=new JPanel();
+
         panneauList=new JPanel();
         panneauMois=new JPanel();
         panneauSemaine=new JPanel();
 
 
-        mainPanel.add(choix_vue);
+
+
+        mainPanel.add(label_choix_vue,BorderLayout.NORTH);
+        mainPanel.add(choix_vue,BorderLayout.NORTH);
+
         //mainPanel.add(panneauSemaine);
         //mainPanel.add(panneauMois);
         //mainPanel.add(panneauList)
 
 
-        ButtonZone=new JPanel();
 
-        b_creer=new JButton();
-        b_dupliquer=new JButton();
-        b_editer=new JButton();
-        b_marquer=new JButton();
-        b_supprimer=new JButton();
+
+        ButtonZone=new JPanel();
+        GridLayout ButtonGrid= new GridLayout(5,1);
+        ButtonZone.setLayout(ButtonGrid);
+
+        b_creer=new JButton("Créer");
+        b_dupliquer=new JButton("Dupliquer");
+        b_editer=new JButton("Editer");
+        b_marquer=new JButton("Marquer");
+        b_supprimer=new JButton("Supprimer");
+
+
 
         ButtonZone.add(b_creer);
         ButtonZone.add(b_dupliquer);
         ButtonZone.add(b_editer);
         ButtonZone.add(b_marquer);
         ButtonZone.add(b_supprimer);
+
+
+
+        mainPanel.add(ButtonZone,BorderLayout.EAST);
 
         setJMenuBar(menuBar);
         setContentPane(mainPanel);
