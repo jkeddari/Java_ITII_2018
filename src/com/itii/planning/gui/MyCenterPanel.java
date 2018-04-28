@@ -17,6 +17,7 @@ public class MyCenterPanel extends JPanel {
         JPanel panneauMois=new JPanel();
         JPanel panneauSemaine=new JPanel();
 
+        MyPanneauList PanelList =new MyPanneauList();
         panneauSemaine.setBackground(Color.RED);
 
 
@@ -31,7 +32,7 @@ public class MyCenterPanel extends JPanel {
 
 
 
-        myCenterPanel.add(panneauSemaine,gbc);
+        myCenterPanel.add(PanelList.getMyPanneauList(),gbc);
 
 
 
