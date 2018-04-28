@@ -36,14 +36,12 @@ public class MainWindow extends JFrame{
         setDefaultCloseOperation(EXIT_ON_CLOSE); //Arret d'execution du programme lors de la fermeture de la fenêtre
 
         mainPanel=new JPanel(new BorderLayout());
+
         MyMenuBar myBar = new MyMenuBar();
+        MyTopMenu topMenu = new MyTopMenu();
 
 
-
-
-
-
-        //mainPanel.add(Pchoix_vue,BorderLayout.NORTH);
+        mainPanel.add(topMenu.getMyTopMenu(),BorderLayout.NORTH);
 
 
         JPanel TaskPanel=new JPanel();
