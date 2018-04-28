@@ -21,8 +21,6 @@ public class MyCenterPanel extends JPanel {
         panneauSemaine.setBackground(Color.RED);
 
 
-
-
         gbc.gridx=0;
         gbc.gridy=0;
 
@@ -30,7 +28,7 @@ public class MyCenterPanel extends JPanel {
         gbc.weighty=3;
         gbc.fill=GridBagConstraints.BOTH;
 
-
+        gbc.insets = new Insets(2,5,5,2);
 
         myCenterPanel.add(PanelList.getMyPanneauList(),gbc);
 
