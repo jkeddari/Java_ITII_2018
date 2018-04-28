@@ -11,12 +11,8 @@ public class MainWindow extends JFrame{
     private JPanel mainPanel;
 
 
-    private JComboBox choix_vue;
-
     private JPanel panneauList, panneauSemaine, panneauMois;
-    private JPanel ButtonZone;
 
-    private JButton b_creer,b_editer,b_marquer,b_dupliquer,b_supprimer;
 
 
     public static MainWindow getInstance(){
@@ -77,31 +73,14 @@ public class MainWindow extends JFrame{
         //mainPanel.add(panneauList)
 
 
-
-        ButtonZone=new JPanel();
-        GridLayout ButtonGrid= new GridLayout(5,1);
-        ButtonZone.setLayout(ButtonGrid);
-        b_creer=new JButton("Créer");
-        b_dupliquer=new JButton("Dupliquer");
-        b_editer=new JButton("Editer");
-        b_marquer=new JButton("Marquer");
-        b_supprimer=new JButton("Supprimer");
-
-
-
-        ButtonZone.add(b_creer);
-        ButtonZone.add(b_dupliquer);
-        ButtonZone.add(b_editer);
-        ButtonZone.add(b_marquer);
-        ButtonZone.add(b_supprimer);
-
+        MyButtonPanel myButtons=new MyButtonPanel();
 
         gbc.gridx=4;
         gbc.weightx=0.5;
         gbc.weighty=2;
         gbc.fill=GridBagConstraints.EAST;
 
-        CenterPanel.add(ButtonZone,gbc);
+        CenterPanel.add(myButtons.getMyButton(),gbc);
 
 
         mainPanel.add(CenterPanel);
