@@ -10,13 +10,6 @@ public class MainWindow extends JFrame{
 
     private JPanel mainPanel;
 
-    private JMenuBar menuBar; //Attribut// pour la création du Menu
-    private JMenu fichier,edition,vue,aide;
-
-    private JMenuItem quitter; //Item menu Fichier
-    private JMenuItem creer, editer,marquer,dupliquer,supprimer; //Item menu Edition
-    private JMenuItem liste,semaine,mois; //Item menu Vue
-
 
     private JComboBox choix_vue;
 
@@ -43,94 +36,45 @@ public class MainWindow extends JFrame{
         setDefaultCloseOperation(EXIT_ON_CLOSE); //Arret d'execution du programme lors de la fermeture de la fenêtre
 
         mainPanel=new JPanel(new BorderLayout());
+        MyMenuBar myBar = new MyMenuBar();
 
 
 
-        menuBar=new JMenuBar(); //Instance de la MenuBar
-
-        fichier=new JMenu("Fichier");
-        edition=new JMenu("Edition");
-        vue=new JMenu("Vue");
-        aide=new JMenu("Aide");
-
-
-        quitter=new JMenuItem("quitter"); //MenuItem pour fichier
-
-
-        /** MenuItem pour Edition */
-        creer=new JMenuItem("Créer");
-        editer=new JMenuItem("Editer");
-        marquer=new JMenuItem("Marquer");
-        dupliquer=new JMenuItem("Dupliquer");
-        supprimer=new JMenuItem("Supprimer");
-
-        /** MenuItem pour Vue */
-        liste=new JMenuItem("Liste");
-        semaine=new JMenuItem("Semaine");
-        mois=new JMenuItem("Mois");
-        /*********************************/
-
-        fichier.add(quitter);
-
-        edition.add(creer);
-        edition.add(editer);
-        edition.add(marquer);
-        edition.add(dupliquer);
-        edition.add(supprimer);
-
-        vue.add(liste);
-        vue.add(semaine);
-        vue.add(mois);
-
-
-        menuBar.add(fichier);
-        menuBar.add(edition);
-        menuBar.add(vue);
-        menuBar.add(aide);
-
-        /*********************************/
-
-
-        mainPanel.setLayout(new GridBagLayout());
-        GridBagConstraints gbc=new GridBagConstraints();
 
 
 
-        String[] VueList = { "Liste", "Semaine", "Mois"};
-        JPanel P_choix_vue=new JPanel();
-        choix_vue=new JComboBox(VueList);
-        JLabel label_choix_vue=new JLabel("Vue : ");
-
-        P_choix_vue.add(label_choix_vue,BorderLayout.WEST);
-        P_choix_vue.add(choix_vue);
-
-        gbc.gridx=0;
-        gbc.gridy=0;
-        gbc.gridheight=1;
-        gbc.gridwidth=GridBagConstraints.REMAINDER;
-        gbc.anchor=GridBagConstraints.PAGE_START;
-        mainPanel.add(P_choix_vue,gbc);
+        //mainPanel.add(Pchoix_vue,BorderLayout.NORTH);
 
 
-        JPanel affichage_planning=new JPanel();
+        JPanel TaskPanel=new JPanel();
         panneauList=new JPanel();
         panneauMois=new JPanel();
         panneauSemaine=new JPanel();
 
         panneauSemaine.setBackground(Color.RED);
+
+
+
+
+
+        JPanel CenterPanel=new JPanel();
+
+        CenterPanel.setLayout(new GridBagLayout());
+
+        GridBagConstraints gbc=new GridBagConstraints();
+
+
+
         gbc.gridx=0;
-        gbc.gridy=1;
-        gbc.gridwidth=1;
-        gbc.gridheight=1;
+        gbc.gridy=0;
+
+        gbc.weightx=4;
+        gbc.weighty=3;
         gbc.fill=GridBagConstraints.BOTH;
 
 
-        mainPanel.add(panneauSemaine,gbc);
 
-        //mainPanel.add(label_choix_vue,BorderLayout.NORTH);
-        //mainPanel.add(choix_vue,BorderLayout.NORTH);
-
-        //mainPanel.add(panneauSemaine);
+        CenterPanel.add(panneauSemaine,gbc);
         //mainPanel.add(panneauMois);
         //mainPanel.add(panneauList)
 
@@ -154,18 +98,21 @@ public class MainWindow extends JFrame{
         ButtonZone.add(b_supprimer);
 
 
-        gbc.gridx=6;
-        gbc.gridy=1;
-        gbc.gridwidth=GridBagConstraints.REMAINDER;
-        gbc.gridheight=1;
-        //gbc.anchor=GridBagConstraints.LINE_END;
+        gbc.gridx=4;
+        gbc.weightx=0.5;
+        gbc.weighty=2;
+        gbc.fill=GridBagConstraints.EAST;
 
-        mainPanel.add(ButtonZone,gbc);
+        CenterPanel.add(ButtonZone,gbc);
 
-        setJMenuBar(menuBar);
+
+        mainPanel.add(CenterPanel);
+
+
+        setJMenuBar(myBar.getMyMenuBar());
         setContentPane(mainPanel);
         this.validate();
-        //this.repaint();
+        this.repaint();
 
     }
 
