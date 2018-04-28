@@ -91,23 +91,44 @@ public class MainWindow extends JFrame{
         /*********************************/
 
 
-        String[] VueList = { "Liste", "Semaine", "Mois"};
+        mainPanel.setLayout(new GridBagLayout());
+        GridBagConstraints gbc=new GridBagConstraints();
 
+
+
+        String[] VueList = { "Liste", "Semaine", "Mois"};
+        JPanel P_choix_vue=new JPanel();
         choix_vue=new JComboBox(VueList);
         JLabel label_choix_vue=new JLabel("Vue : ");
 
+        P_choix_vue.add(label_choix_vue,BorderLayout.WEST);
+        P_choix_vue.add(choix_vue);
+
+        gbc.gridx=0;
+        gbc.gridy=0;
+        gbc.gridheight=1;
+        gbc.gridwidth=GridBagConstraints.REMAINDER;
+        gbc.anchor=GridBagConstraints.PAGE_START;
+        mainPanel.add(P_choix_vue,gbc);
+
 
         JPanel affichage_planning=new JPanel();
-
         panneauList=new JPanel();
         panneauMois=new JPanel();
         panneauSemaine=new JPanel();
 
+        panneauSemaine.setBackground(Color.RED);
+        gbc.gridx=0;
+        gbc.gridy=1;
+        gbc.gridwidth=1;
+        gbc.gridheight=1;
+        gbc.fill=GridBagConstraints.BOTH;
 
 
+        mainPanel.add(panneauSemaine,gbc);
 
-        mainPanel.add(label_choix_vue,BorderLayout.NORTH);
-        mainPanel.add(choix_vue,BorderLayout.NORTH);
+        //mainPanel.add(label_choix_vue,BorderLayout.NORTH);
+        //mainPanel.add(choix_vue,BorderLayout.NORTH);
 
         //mainPanel.add(panneauSemaine);
         //mainPanel.add(panneauMois);
@@ -115,11 +136,9 @@ public class MainWindow extends JFrame{
 
 
 
-
         ButtonZone=new JPanel();
         GridLayout ButtonGrid= new GridLayout(5,1);
         ButtonZone.setLayout(ButtonGrid);
-
         b_creer=new JButton("Créer");
         b_dupliquer=new JButton("Dupliquer");
         b_editer=new JButton("Editer");
@@ -135,13 +154,19 @@ public class MainWindow extends JFrame{
         ButtonZone.add(b_supprimer);
 
 
+        gbc.gridx=6;
+        gbc.gridy=1;
+        gbc.gridwidth=GridBagConstraints.REMAINDER;
+        gbc.gridheight=1;
+        //gbc.anchor=GridBagConstraints.LINE_END;
 
-        mainPanel.add(ButtonZone,BorderLayout.EAST);
+        mainPanel.add(ButtonZone,gbc);
 
         setJMenuBar(menuBar);
         setContentPane(mainPanel);
         this.validate();
-        this.repaint();
+        //this.repaint();
+
     }
 
 
