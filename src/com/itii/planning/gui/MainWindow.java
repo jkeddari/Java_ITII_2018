@@ -40,50 +40,9 @@ public class MainWindow extends JFrame{
         mainPanel.add(topMenu.getMyTopMenu(),BorderLayout.NORTH);
 
 
-        JPanel TaskPanel=new JPanel();
-        panneauList=new JPanel();
-        panneauMois=new JPanel();
-        panneauSemaine=new JPanel();
 
-        panneauSemaine.setBackground(Color.RED);
-
-
-
-
-
-        JPanel CenterPanel=new JPanel();
-
-        CenterPanel.setLayout(new GridBagLayout());
-
-        GridBagConstraints gbc=new GridBagConstraints();
-
-
-
-        gbc.gridx=0;
-        gbc.gridy=0;
-
-        gbc.weightx=4;
-        gbc.weighty=3;
-        gbc.fill=GridBagConstraints.BOTH;
-
-
-
-        CenterPanel.add(panneauSemaine,gbc);
-        //mainPanel.add(panneauMois);
-        //mainPanel.add(panneauList)
-
-
-        MyButtonPanel myButtons=new MyButtonPanel();
-
-        gbc.gridx=4;
-        gbc.weightx=0.5;
-        gbc.weighty=2;
-        gbc.fill=GridBagConstraints.EAST;
-
-        CenterPanel.add(myButtons.getMyButton(),gbc);
-
-
-        mainPanel.add(CenterPanel);
+        MyCenterPanel myCenterPanel=new MyCenterPanel();
+        mainPanel.add(myCenterPanel.getMyCenterPanel());
 
 
         setJMenuBar(myBar.getMyMenuBar());
