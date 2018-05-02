@@ -41,7 +41,7 @@ public class MyPanneauList extends JPanel {
         Border line = BorderFactory.createLineBorder(Color.LIGHT_GRAY,2);
 
         PanneauList.add(j,gbc);
-        //PanneauList.setBorder(line);
+
 
     }
     public JPanel getMyPanneauList(){
