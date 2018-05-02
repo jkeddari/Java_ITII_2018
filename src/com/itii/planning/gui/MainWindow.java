@@ -35,13 +35,9 @@ public class MainWindow extends JFrame{
 
         MyMenuBar myBar = new MyMenuBar();
         MyTopMenu topMenu = new MyTopMenu();
-
+        MyCenterPanel myCenterPanel=new MyCenterPanel();
 
         mainPanel.add(topMenu.getMyTopMenu(),BorderLayout.NORTH);
-
-
-
-        MyCenterPanel myCenterPanel=new MyCenterPanel();
         mainPanel.add(myCenterPanel.getMyCenterPanel());
 
 

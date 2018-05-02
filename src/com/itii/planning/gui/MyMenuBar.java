@@ -6,7 +6,7 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class MyMenuBar extends JMenuBar {
+public class MyMenuBar{
 
     private JMenuBar myBar;
 
@@ -46,21 +46,23 @@ public class MyMenuBar extends JMenuBar {
         vue.add(semaine);
         vue.add(mois);
 
-
-        creer.addActionListener(new ActionListener() {
+        /** Ajout action sur bouttons **/
+        quitter.addActionListener(new ActionListener(){
             @Override
-            public void actionPerformed(ActionEvent e) {
-                TaskDialog t=new TaskDialog();
-            }
-        });
-
-        quitter.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
+            public void actionPerformed(ActionEvent e){
                 System.exit(0);
             }
         });
 
+        creer.addActionListener(new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent e){
+                TaskDialog t=new TaskDialog();
+            }
+        });
+
+
+        /** Ajout des menu à la bar **/
         myBar.add(fichier);
         myBar.add(edition);
         myBar.add(vue);
