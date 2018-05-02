@@ -1,7 +1,11 @@
 package com.itii.planning.gui;
 
+import com.itii.planning.gui.task.TaskDialog;
+
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.*;
 
 public class MyButtonPanel extends JPanel {
@@ -28,6 +32,13 @@ public class MyButtonPanel extends JPanel {
         ButtonZone.add(b_marquer);
         ButtonZone.add(b_supprimer);
         ButtonZone.add(lab_date);
+
+        b_creer.addActionListener(new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                TaskDialog t=new TaskDialog();
+            }
+        });
 
     }
 

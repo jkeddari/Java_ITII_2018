@@ -6,13 +6,14 @@ import java.awt.*;
 import javax.swing.border.Border;
 
 
-public class MyPanneauList extends JPanel {
+public class MyListPanel extends TaskPanel {
 
-    private JPanel PanneauList;
-    public MyPanneauList(){
-        PanneauList=new JPanel();
+    private JPanel ListPanel;
 
-        PanneauList.setLayout(new GridBagLayout());
+    public MyListPanel(){
+        ListPanel=new JPanel();
+
+        ListPanel.setLayout(new GridBagLayout());
         GridBagConstraints gbc=new GridBagConstraints();
 
         //Titre des colonnes
@@ -40,12 +41,12 @@ public class MyPanneauList extends JPanel {
 
         Border line = BorderFactory.createLineBorder(Color.LIGHT_GRAY,2);
 
-        PanneauList.add(j,gbc);
+        ListPanel.add(j,gbc);
 
 
     }
-    public JPanel getMyPanneauList(){
-        return PanneauList;
+    public JPanel getMyListPanel(){
+        return ListPanel;
     }
 
 }

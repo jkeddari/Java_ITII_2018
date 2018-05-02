@@ -1,6 +1,10 @@
 package com.itii.planning.gui;
 
+import com.itii.planning.gui.task.TaskDialog;
+
 import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class MyMenuBar extends JMenuBar {
 
@@ -42,6 +46,20 @@ public class MyMenuBar extends JMenuBar {
         vue.add(semaine);
         vue.add(mois);
 
+
+        creer.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                TaskDialog t=new TaskDialog();
+            }
+        });
+
+        quitter.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                System.exit(0);
+            }
+        });
 
         myBar.add(fichier);
         myBar.add(edition);
