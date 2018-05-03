@@ -1,10 +1,8 @@
 package com.itii.planning.gui.task;
 
-import com.itii.planning.gui.MainWindow;
 import org.jdatepicker.JDatePicker;
 
 import javax.swing.*;
-import javax.swing.JOptionPane;
 import java.awt.*;
 
 
@@ -16,13 +14,21 @@ public class TaskDialog extends JDialog {
         setSize(240,160);
         setVisible(true);
 
-        JTextField JT_event_name = new JTextField();
-        JLabel JL_event_name = new JLabel("Nom de la tâche : ");
 
         JPanel PaneTaskDialog = new JPanel();
+        GridLayout grid = new GridLayout();
+        PaneTaskDialog.setLayout(new GridLayout(3,1));
 
-        PaneTaskDialog.add(JL_event_name);
+        JTextField JT_event_name = new JTextField();
+        PaneTaskDialog.add(new JLabel("Nom de la tâche : "));
         PaneTaskDialog.add(JT_event_name,BorderLayout.EAST);
+
+        JDatePicker date= new JDatePicker();
+        PaneTaskDialog.add(date);
+
+        JTextField JT_event_comment = new JTextField(20);
+        PaneTaskDialog.add(new JLabel("Commentaire : "));
+        PaneTaskDialog.add(JT_event_comment,BorderLayout.EAST);
 
         setContentPane(PaneTaskDialog);
         this.validate();
