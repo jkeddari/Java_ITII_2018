@@ -4,11 +4,10 @@ import javax.swing.*;
 import java.awt.*;
 
 public class MyCenterPanel extends JPanel {
-    private JPanel myCenterPanel;
 
     public MyCenterPanel(){
-        myCenterPanel=new JPanel();
-        myCenterPanel.setLayout(new GridBagLayout());
+
+        setLayout(new GridBagLayout());
         GridBagConstraints gbc=new GridBagConstraints();
 
 
@@ -30,22 +29,16 @@ public class MyCenterPanel extends JPanel {
 
         gbc.insets = new Insets(2,5,5,2);
 
-        myCenterPanel.add(PanelList.getMyListPanel(),gbc);
+        add(new MyListPanel(),gbc);
 
-
-
-        MyButtonPanel myButtons=new MyButtonPanel();
 
         gbc.gridx=4;
         gbc.weightx=0.5;
         gbc.weighty=2;
         gbc.fill=GridBagConstraints.EAST;
 
-        myCenterPanel.add(myButtons.getMyButton(),gbc);
+        add(new MyButtonPanel(),gbc);
 
     }
 
-    public JPanel getMyCenterPanel(){
-        return myCenterPanel;
-    }
 }

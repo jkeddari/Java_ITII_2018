@@ -10,12 +10,10 @@ import java.util.*;
 
 public class MyButtonPanel extends JPanel {
 
-    private JPanel ButtonZone;
-
     public MyButtonPanel() {
-        ButtonZone = new JPanel();
+        //ButtonZone = new JPanel();
         GridLayout ButtonGrid = new GridLayout(6, 1);
-        ButtonZone.setLayout(ButtonGrid);
+        setLayout(ButtonGrid);
         JButton b_creer = new JButton("Créer");
         JButton b_dupliquer = new JButton("Dupliquer");
         JButton b_editer = new JButton("Editer");
@@ -26,23 +24,21 @@ public class MyButtonPanel extends JPanel {
         JLabel lab_date= new JLabel(s_date);
 
 
-        ButtonZone.add(b_creer);
-        ButtonZone.add(b_dupliquer);
-        ButtonZone.add(b_editer);
-        ButtonZone.add(b_marquer);
-        ButtonZone.add(b_supprimer);
-        ButtonZone.add(lab_date);
+        add(b_creer);
+        add(b_dupliquer);
+        add(b_editer);
+        add(b_marquer);
+        add(b_supprimer);
+        add(lab_date);
 
         b_creer.addActionListener(new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent e) {
-                TaskDialog t=new TaskDialog();
+                new TaskDialog();
             }
         });
 
     }
 
-    public JPanel getMyButton(){
-        return ButtonZone;
-    }
+
 }

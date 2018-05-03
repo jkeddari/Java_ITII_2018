@@ -6,12 +6,10 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class MyMenuBar{
+public class MyMenuBar extends JMenuBar {
 
-    private JMenuBar myBar;
 
     public MyMenuBar(){
-        myBar=new JMenuBar();
 
         JMenu fichier=new JMenu("Fichier");
         JMenu edition=new JMenu("Edition");
@@ -63,13 +61,9 @@ public class MyMenuBar{
 
 
         /** Ajout des menu à la bar **/
-        myBar.add(fichier);
-        myBar.add(edition);
-        myBar.add(vue);
-        myBar.add(aide);
-    }
-
-    public JMenuBar getMyMenuBar(){
-        return myBar;
+        add(fichier);
+        add(edition);
+        add(vue);
+        add(aide);
     }
 }

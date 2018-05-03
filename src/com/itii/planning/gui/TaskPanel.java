@@ -1,4 +1,6 @@
 package com.itii.planning.gui;
 
-public class TaskPanel {
+import javax.swing.*;
+
+public class TaskPanel extends JPanel {
 }

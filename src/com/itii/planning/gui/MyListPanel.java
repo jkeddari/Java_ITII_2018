@@ -8,12 +8,10 @@ import javax.swing.border.Border;
 
 public class MyListPanel extends TaskPanel {
 
-    private JPanel ListPanel;
 
     public MyListPanel(){
-        ListPanel=new JPanel();
 
-        ListPanel.setLayout(new GridBagLayout());
+        setLayout(new GridBagLayout());
         GridBagConstraints gbc=new GridBagConstraints();
 
         //Titre des colonnes
@@ -41,13 +39,8 @@ public class MyListPanel extends TaskPanel {
 
         Border line = BorderFactory.createLineBorder(Color.LIGHT_GRAY,2);
 
-        ListPanel.add(j,gbc);
-
+        add(j,gbc);
 
     }
-    public JPanel getMyListPanel(){
-        return ListPanel;
-    }
-
 }
 

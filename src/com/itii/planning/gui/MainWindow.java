@@ -11,8 +11,6 @@ public class MainWindow extends JFrame{
     private JPanel mainPanel;
 
 
-    private JPanel panneauList, panneauSemaine, panneauMois;
-
 
 
     public static MainWindow getInstance(){
@@ -33,15 +31,11 @@ public class MainWindow extends JFrame{
 
         mainPanel=new JPanel(new BorderLayout());
 
-        MyMenuBar myBar = new MyMenuBar();
-        MyTopMenu topMenu = new MyTopMenu();
-        MyCenterPanel myCenterPanel=new MyCenterPanel();
-
-        mainPanel.add(topMenu.getMyTopMenu(),BorderLayout.NORTH);
-        mainPanel.add(myCenterPanel.getMyCenterPanel());
+        mainPanel.add(new MyTopMenu(),BorderLayout.NORTH);
+        mainPanel.add(new MyCenterPanel());
 
 
-        setJMenuBar(myBar.getMyMenuBar());
+        setJMenuBar(new MyMenuBar());
         setContentPane(mainPanel);
         this.validate();
         this.repaint();
