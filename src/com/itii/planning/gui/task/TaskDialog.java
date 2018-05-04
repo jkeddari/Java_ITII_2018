@@ -1,7 +1,6 @@
 package com.itii.planning.gui.task;
 
 import javax.swing.*;
-import java.awt.*;
 
 
 public class TaskDialog extends JDialog {
@@ -9,7 +8,7 @@ public class TaskDialog extends JDialog {
     public TaskDialog() {
 
         setTitle("Nouvelle évenement");
-        setSize(420,180);
+        setSize(500,240);
         setVisible(true);
 
 

@@ -12,6 +12,7 @@ public class TaskDialogInputPanel extends JPanel{
         setLayout(new GridBagLayout());
         GridBagConstraints grid = new GridBagConstraints();
 
+        grid.ipady=grid.anchor=GridBagConstraints.WEST;
         //Nom de tache
         grid.gridx=0;
         grid.gridy=0;
@@ -21,6 +22,7 @@ public class TaskDialogInputPanel extends JPanel{
 
         grid.gridx=1;
         grid.weightx=1;
+
         grid.fill=GridBagConstraints.HORIZONTAL;
 
         JTextField JT_event_name = new JTextField();
@@ -42,13 +44,32 @@ public class TaskDialogInputPanel extends JPanel{
         JDatePicker date= new JDatePicker();
         add(date,grid);
 
-        //Heure
-        grid.gridx=0;
+        //Heure:min
+        /*HEURE*/
+        grid.gridx=2;
         grid.gridy=2;
-        grid.weightx=1;
+        grid.weightx=0.2;
         grid.weighty=1;
+        grid.fill=GridBagConstraints.NONE;
+        add(new JLabel("Heure : "),grid);
+        grid.gridx=1;
+        grid.weightx=0.3;
         grid.fill=GridBagConstraints.HORIZONTAL;
-        add(new TaskDialogTimePanel(),grid);
+        JTextField JT_event_hours = new JTextField();
+        add(JT_event_hours,grid);
+
+        /*Min*/
+        grid.gridx=2;
+        grid.gridy=2;
+        grid.weightx=0.2;
+        grid.weighty=1;
+        grid.fill=GridBagConstraints.NONE;
+        add(new JLabel("Minute : "),grid);
+        grid.gridx=3;
+        grid.weightx=0.3;
+        grid.fill=GridBagConstraints.HORIZONTAL;
+        JTextField JT_event_minutes = new JTextField();
+        add(JT_event_minutes,grid);
 
         //Commentaire
         grid.gridx=0;

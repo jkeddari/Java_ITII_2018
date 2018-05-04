@@ -10,11 +10,12 @@ public class TaskDialogTimePanel extends JPanel {
         JLabel heure;
         JLabel minute;
 
-        add(new JTextField("Heure : "));
+
+        add(new JLabel("Heure : "));
         JTextField JT_hours = new JTextField();
         add(JT_hours);
 
-        add(new JTextField("Minute : "));
+        add(new JLabel("Minute : "));
         JTextField JT_minutes = new JTextField();
         add(JT_minutes);
     }
