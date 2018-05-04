@@ -1,6 +1,10 @@
 package com.itii.planning.testDB; // Adapter en fonction de votre package
-import java.sql.Connection; import java.sql.DriverManager; import java.sql.PreparedStatement; import java.sql.ResultSet;
-import java.sql.SQLException; import java.sql.Statement;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 /**
  * Test de connection / exécution de requêtes SQL / déconncetion de SQLite * @author Sebastien
  */
@@ -13,7 +17,8 @@ public class SQLiteTest {
     private static final String FIELD_STATE = "state";
 
     public static void main(String[] args){
-        Connection connection = null; Statement statement = null;
+        Connection connection = null;
+        Statement statement = null;
         // Création de la table
         try {
             // Chargement du Driver. Stockage des données dans le fichier planning.db
@@ -35,6 +40,8 @@ public class SQLiteTest {
             System.out.println(" Table non créée ou déjà existante");
             e.printStackTrace();
         }
+
+
 // Test d'écriture dans la table
         try {
             PreparedStatement stmt = connection.prepareStatement(
@@ -50,7 +57,10 @@ public class SQLiteTest {
             System.out.println("insertion d'une nouvelle entrée dans la table");
         }
         catch (SQLException e) {
-            System.out.println("problème dans l'insertion d'une nouvelle enrée dans la table."); }
+            System.out.println("problème dans l'insertion d'une nouvelle enrée dans la table.");
+        }
+
+
         // Test de lecture depuis la table
         try {
             ResultSet rs = statement.executeQuery("select * from " + TABLE_NAME);
