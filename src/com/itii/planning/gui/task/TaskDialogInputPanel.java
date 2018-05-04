@@ -42,10 +42,17 @@ public class TaskDialogInputPanel extends JPanel{
         JDatePicker date= new JDatePicker();
         add(date,grid);
 
+        //Heure
+        grid.gridx=0;
+        grid.gridy=2;
+        grid.weightx=1;
+        grid.weighty=1;
+        grid.fill=GridBagConstraints.HORIZONTAL;
+        add(new TaskDialogTimePanel(),grid);
 
         //Commentaire
         grid.gridx=0;
-        grid.gridy=2;
+        grid.gridy=3;
         grid.insets = new Insets(0,0,0,5);
         grid.weightx=0.1;
         grid.weighty=5;
@@ -53,7 +60,6 @@ public class TaskDialogInputPanel extends JPanel{
         add(new JLabel("Commentaire : "),grid);
 
         grid.gridx=1;
-        grid.gridy=2;
         grid.fill=GridBagConstraints.HORIZONTAL;
 
         JTextArea JT_event_comment = new JTextArea(3,1);
