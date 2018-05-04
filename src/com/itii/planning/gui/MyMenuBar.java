@@ -55,7 +55,7 @@ public class MyMenuBar extends JMenuBar {
         creer.addActionListener(new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent e){
-                TaskDialog t=new TaskDialog();
+                new TaskDialog();
             }
         });
 
