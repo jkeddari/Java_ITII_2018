@@ -8,7 +8,7 @@ public class TaskDialog extends JDialog {
     public TaskDialog() {
 
         setTitle("Nouvelle évenement");
-        setSize(500,240);
+        setSize(500,280);
         setVisible(true);
 
 

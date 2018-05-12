@@ -1,7 +1,5 @@
 package com.itii.planning.gui.task;
 
-import com.itii.planning.gui.MainWindow;
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;

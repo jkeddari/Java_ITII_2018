@@ -16,9 +16,12 @@ public class MyCenterPanel extends JPanel {
         JPanel panneauMois=new JPanel();
         JPanel panneauSemaine=new JPanel();
 
+        
         MyListPanel PanelList =new MyListPanel();
         panneauSemaine.setBackground(Color.RED);
 
+        MyMonthPanel PanelMonth = new MyMonthPanel();
+        panneauMois.setBackground(Color.BLUE);
 
         gbc.gridx=0;
         gbc.gridy=0;
@@ -30,6 +33,17 @@ public class MyCenterPanel extends JPanel {
         gbc.insets = new Insets(2,5,5,2);
 
         add(new MyListPanel(),gbc);
+
+        gbc.gridx=0;
+        gbc.gridy=0;
+
+        gbc.weightx=4;
+        gbc.weighty=3;
+        gbc.fill=GridBagConstraints.BOTH;
+
+        gbc.insets = new Insets(2,5,5,2);
+
+        add(new MyMonthPanel(),gbc);
 
 
         gbc.gridx=4;

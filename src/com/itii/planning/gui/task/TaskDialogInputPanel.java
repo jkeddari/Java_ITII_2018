@@ -44,9 +44,9 @@ public class TaskDialogInputPanel extends JPanel{
         JDatePicker date= new JDatePicker();
         add(date,grid);
 
-        //Heure:min
+       //Heure:min
         /*HEURE*/
-        grid.gridx=2;
+        /*grid.gridx=0;
         grid.gridy=2;
         grid.weightx=0.2;
         grid.weighty=1;
@@ -58,18 +58,21 @@ public class TaskDialogInputPanel extends JPanel{
         JTextField JT_event_hours = new JTextField();
         add(JT_event_hours,grid);
 
+
+
+
         /*Min*/
-        grid.gridx=2;
+        /*grid.gridx=2;
         grid.gridy=2;
         grid.weightx=0.2;
         grid.weighty=1;
         grid.fill=GridBagConstraints.NONE;
-        add(new JLabel("Minute : "),grid);
+        add(new JLabel("Min : "),grid);
         grid.gridx=3;
         grid.weightx=0.3;
         grid.fill=GridBagConstraints.HORIZONTAL;
         JTextField JT_event_minutes = new JTextField();
-        add(JT_event_minutes,grid);
+        add(JT_event_minutes,grid);*/
 
         //Commentaire
         grid.gridx=0;
