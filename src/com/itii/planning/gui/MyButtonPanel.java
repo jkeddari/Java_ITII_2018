@@ -8,7 +8,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.*;
 
-public class MyButtonPanel extends JPanel {
+public class MyButtonPanel extends MyCenterPanel {
 
     public MyButtonPanel() {
         //ButtonZone = new JPanel();
@@ -18,7 +18,7 @@ public class MyButtonPanel extends JPanel {
         JButton b_dupliquer = new JButton("Dupliquer");
         JButton b_editer = new JButton("Editer");
         JButton b_marquer = new JButton("Marquer");
-        JButton b_supprimer = new JButton("Supprimer");
+        b_supprimer = new JButton("Supprimer");
         Date d=new Date();
         String s_date="Date du jour : "+(d.getYear()+1900)+"/"+(d.getMonth()+1)+"/"+(d.getDate());
         JLabel lab_date= new JLabel(s_date);

@@ -29,19 +29,19 @@ public class dbAccess {
                     + FIELD_DATE + " text, " // Details
                     + FIELD_DETAILS + " text, " // date as ISO8601 strings ("YYYY-MM-DD HH:MM:SS.SSS").
                     + FIELD_STATE + " boolean " + " )"); // marquée
-            System.out.println("table \"" + TABLE_NAME + "\" créée ");
+            //System.out.println("table \"" + TABLE_NAME + "\" créée ");
         } catch (SQLException e) {
             System.out.println(" Table non créée ou déjà existante");
             e.printStackTrace();
         }
     }
 
-    public ArrayList<Object[]> readDb(){
+    public ArrayList<Object[]> readDB(){
         ArrayList<Object[]> obj = new ArrayList<Object[]>();
         try {
             ResultSet rs = statement.executeQuery("select * from " + TABLE_NAME);
             while (rs.next()) {
-                obj.add(new Object[]{rs.getString(FIELD_NAME),rs.getString(FIELD_DATE),rs.getString(FIELD_DETAILS)});
+                obj.add(new Object[]{rs.getString(FIELD_ID),rs.getString(FIELD_NAME),rs.getString(FIELD_DATE),rs.getString(FIELD_DETAILS)});
             }
         }
         catch (SQLException e) {
@@ -50,6 +50,35 @@ public class dbAccess {
         return obj;
     }
 
+    public void writeDB(String name, String date, String comment){
+        try {
+            PreparedStatement stmt = connection.prepareStatement(
+                    "insert into " + TABLE_NAME + " ( " + FIELD_NAME + ","
+                            + FIELD_DATE + "," + FIELD_DETAILS + ","
+                            + FIELD_STATE + " ) " + "values ( ?, ?, ?, ?) ");
+            stmt.setString(1, name);
+            stmt.setString(2, date);
+            stmt.setString(3, comment);
+            stmt.setString(4, "0");
+            stmt.executeUpdate();
+        }
+        catch (SQLException e) {
+            System.out.println("problème dans l'insertion d'une nouvelle enrée dans la table.");
+        }
+    }
+
+    public void deleteRow(int id){
+        try {
+            PreparedStatement stmt = connection.prepareStatement(
+                    "delete from " +TABLE_NAME+ " WHERE "+FIELD_ID+" = ? ");
+            stmt.setInt(1, id);
+
+            stmt.executeUpdate();
+        }
+        catch (SQLException e) {
+            System.out.println("problème dans la suppression d'un élement dans la base");
+        }
+    }
 
     //Fermeture de Bade de données
     public void closeDb (){
@@ -57,7 +86,7 @@ public class dbAccess {
             if (connection != null) {
                 connection.close();
             }
-            System.out.println("fermeture de la connection à la base de données");
+            //System.out.println("fermeture de la connection à la base de données");
         } catch (SQLException e) {
             System.out.println("erreur lors de la fermeture de la connection");
         }

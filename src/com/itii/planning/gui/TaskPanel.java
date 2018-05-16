@@ -1,14 +1,33 @@
 package com.itii.planning.gui;
 
+import com.itii.planning.db.dbAccess;
+
 import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 /* Abstract pour ne pas pouvoir créer un objet de type TaskPanel*/
-public abstract class TaskPanel extends JPanel {
+public abstract class TaskPanel extends MyCenterPanel {
+    protected ArrayList<Object[]> list_tasks; /*Objet pour stocker les éléments de la base */
 
-    /*Objet pour stocker les éléments de la base */
-    protected ArrayList<Object[]> list_tasks;
+    public TaskPanel(){
+        b_supprimer.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
 
-    protected abstract void getData();
+            }
+        });
+    }
+
+
+    protected void getData(){
+        list_tasks = new ArrayList<Object[]>();
+        dbAccess dbObj=new dbAccess();
+        list_tasks=dbObj.readDB();
+    }
+
+    protected abstract void display();
+
 
 }

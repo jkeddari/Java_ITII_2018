@@ -23,10 +23,8 @@ public class MyListPanel extends TaskPanel {
         DefaultTableModel tableModel = new DefaultTableModel(title, 0);
         table = new JTable(tableModel);
 
-       // ((DefaultTableModel) table.getModel()).addRow(new Object[]{"TP1#", "2018/04/20 : 12h00", "terminer le tp !"});
-       // ((DefaultTableModel) table.getModel()).addRow(new Object[]{"TP2#", "2018/04/20 : 12h00", "terminer le tp !"});
 
-        display(); /*remplit le tableau qui sera affiché plus tard */
+        display(); //fill the table
 
         table.setFillsViewportHeight(true);
         table.setShowGrid(true);
@@ -51,26 +49,12 @@ public class MyListPanel extends TaskPanel {
     }
 
     @Override
-    protected void getData() {
-        list_tasks = new ArrayList<Object[]>();
-        dbAccess dbObj=new dbAccess();
-        list_tasks=dbObj.readDb();
-    }
-
-    private void display(){
+    protected void display() {
         getData();
-            for (Object[] o : list_tasks) {
-
-                    ((DefaultTableModel) table.getModel()).addRow(o);
-
-
-                    System.out.println("Erreur d'affichage des taches");
-
-            }
-
-
-        ((DefaultTableModel) table.getModel()).addRow(new Object[]{"TP1#", "2018/04/20 : 12h00", "terminer le tp !"});
-        ((DefaultTableModel) table.getModel()).addRow(new Object[]{"TP2#", "2018/04/20 : 12h00", "terminer le tp !"});
+        for (Object[] o : list_tasks) {
+            ((DefaultTableModel) table.getModel()).addRow(o);
+        }
     }
+
 }
 

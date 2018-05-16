@@ -15,7 +15,7 @@ public class MyMonthPanel extends TaskPanel{
     private JTable table;
 
     public MyMonthPanel(){
-
+    /*
         setLayout(new GridBagLayout());
         GridBagConstraints gbc=new GridBagConstraints();
 
@@ -31,11 +31,12 @@ public class MyMonthPanel extends TaskPanel{
         gbc.fill=GridBagConstraints.HORIZONTAL;
         JDatePicker date= new JDatePicker();
         add(date,gbc);
+    */
     }
 
 
     @Override
-    public void getData() {
+    protected void display() {
 
     }
 

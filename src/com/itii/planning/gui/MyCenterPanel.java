@@ -5,23 +5,21 @@ import java.awt.*;
 
 public class MyCenterPanel extends JPanel {
 
+    protected JButton b_supprimer;
+
     public MyCenterPanel(){
 
         setLayout(new GridBagLayout());
         GridBagConstraints gbc=new GridBagConstraints();
 
 
-        JPanel TaskPanel=new JPanel();
-        JPanel panneauList=new JPanel();
-        JPanel panneauMois=new JPanel();
-        JPanel panneauSemaine=new JPanel();
 
         
-        MyListPanel PanelList =new MyListPanel();
-        panneauSemaine.setBackground(Color.RED);
+        //MyListPanel PanelList =new MyListPanel();
+        //panneauSemaine.setBackground(Color.RED);
 
         MyMonthPanel PanelMonth = new MyMonthPanel();
-        panneauMois.setBackground(Color.BLUE);
+        //panneauMois.setBackground(Color.BLUE);
 
         gbc.gridx=0;
         gbc.gridy=0;

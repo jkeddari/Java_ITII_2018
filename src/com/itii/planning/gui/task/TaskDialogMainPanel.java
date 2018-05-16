@@ -1,14 +1,13 @@
 package com.itii.planning.gui.task;
 
+import org.jdatepicker.JDatePicker;
+
 import javax.swing.*;
 import java.awt.*;
 
 public class TaskDialogMainPanel extends JPanel {
 
     public TaskDialogMainPanel(JDialog taskdialog){
-        //Ajout InputPanel
-        add(new TaskDialogInputPanel(),BorderLayout.NORTH);
-        //Ajout ButtonPanel
-        add(new TaskDialogButtonPanel(taskdialog),BorderLayout.SOUTH);
+        add(new TaskDialogInputPanel(taskdialog)); //Ajout InputPanel
     }
 }

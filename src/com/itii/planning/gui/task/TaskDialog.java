@@ -5,10 +5,11 @@ import javax.swing.*;
 
 public class TaskDialog extends JDialog {
 
+
     public TaskDialog() {
 
         setTitle("Nouvelle évenement");
-        setSize(500,280);
+        setSize(380,220);
         setVisible(true);
 
 

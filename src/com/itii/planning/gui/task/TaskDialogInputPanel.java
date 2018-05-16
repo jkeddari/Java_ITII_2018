@@ -1,32 +1,45 @@
 package com.itii.planning.gui.task;
 
+import com.itii.planning.gui.MainWindow;
+import com.itii.planning.gui.MyListPanel;
+import com.itii.planning.objTask.TaskObject;
 import org.jdatepicker.JDatePicker;
+import org.jdatepicker.ComponentFormatDefaults;
+
+import java.text.SimpleDateFormat;
+
+
+
+
+import java.util.Calendar;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class TaskDialogInputPanel extends JPanel{
 
-    public TaskDialogInputPanel(){
+    public TaskDialogInputPanel(JDialog taskdialogue){
 
         setLayout(new GridBagLayout());
         GridBagConstraints grid = new GridBagConstraints();
 
-        grid.ipady=grid.anchor=GridBagConstraints.WEST;
         //Nom de tache
         grid.gridx=0;
         grid.gridy=0;
-        grid.weightx=0.1;
+        grid.weightx=GridBagConstraints.LINE_START;
         grid.weighty=1;
         add(new JLabel("Nom de la tâche : "),grid);
 
         grid.gridx=1;
         grid.weightx=1;
 
+        grid.ipady=GridBagConstraints.NONE;
         grid.fill=GridBagConstraints.HORIZONTAL;
 
-        JTextField JT_event_name = new JTextField();
-        add(JT_event_name,grid);
+        JTextField name = new JTextField();
+        add(name,grid);
 
 
 
@@ -39,44 +52,46 @@ public class TaskDialogInputPanel extends JPanel{
         add(new JLabel("Date : "),grid);
 
         grid.gridx=1;
-        grid.gridy=1;
+
         grid.fill=GridBagConstraints.HORIZONTAL;
-        JDatePicker date= new JDatePicker();
+
+
+        ComponentFormatDefaults defaults = ComponentFormatDefaults.getInstance();
+        defaults.setFormat(ComponentFormatDefaults.Key.SELECTED_DATE_FIELD, new SimpleDateFormat("yyyy-MM-dd"));
+        JDatePicker date = new JDatePicker(Calendar.getInstance());
         add(date,grid);
 
-       //Heure:min
-        /*HEURE*/
-        /*grid.gridx=0;
+        //Heure
+        grid.gridx=0;
         grid.gridy=2;
         grid.weightx=0.2;
         grid.weighty=1;
         grid.fill=GridBagConstraints.NONE;
         add(new JLabel("Heure : "),grid);
+
         grid.gridx=1;
-        grid.weightx=0.3;
+
         grid.fill=GridBagConstraints.HORIZONTAL;
-        JTextField JT_event_hours = new JTextField();
-        add(JT_event_hours,grid);
+        JTextField heure= new JTextField();
+        add(heure,grid);
 
-
-
-
-        /*Min*/
-        /*grid.gridx=2;
-        grid.gridy=2;
+        //Minute
+        grid.gridx=0;
+        grid.gridy=3;
         grid.weightx=0.2;
         grid.weighty=1;
         grid.fill=GridBagConstraints.NONE;
-        add(new JLabel("Min : "),grid);
-        grid.gridx=3;
-        grid.weightx=0.3;
+        add(new JLabel("Minute : "),grid);
+
+        grid.gridx=1;
+
         grid.fill=GridBagConstraints.HORIZONTAL;
-        JTextField JT_event_minutes = new JTextField();
-        add(JT_event_minutes,grid);*/
+        JTextField minute= new JTextField();
+        add(minute,grid);
 
         //Commentaire
         grid.gridx=0;
-        grid.gridy=3;
+        grid.gridy=4;
         grid.insets = new Insets(0,0,0,5);
         grid.weightx=0.1;
         grid.weighty=5;
@@ -86,8 +101,56 @@ public class TaskDialogInputPanel extends JPanel{
         grid.gridx=1;
         grid.fill=GridBagConstraints.HORIZONTAL;
 
-        JTextArea JT_event_comment = new JTextArea(3,1);
-        add(JT_event_comment,grid);
+        JTextField comment = new JTextField();
+        add(comment,grid);
+
+
+
+
+        JButton b_valider = new JButton("Valider");
+        JButton b_annuler = new JButton("Annuler");
+
+
+        grid.gridx=0;
+        grid.gridy=5;
+        //grid.insets=null;
+        grid.weightx=1;
+        grid.weighty=1;
+
+        add(b_valider,grid);
+
+
+        grid.gridx=1;
+        add(b_annuler,grid);
+
+        b_annuler.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                taskdialogue.dispose();
+            }
+        });
+
+
+        b_valider.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if(!name.getText().equals("") && !heure.getText().equals("") && !heure.getText().equals("") && !comment.getText().equals("") && !date.getFormattedTextField().getText().equals("")){
+                    String c_date=date.getFormattedTextField().getText()+" "+heure.getText()+":"+minute.getText();
+                    TaskObject newTask = new TaskObject(name.getText(),c_date,comment.getText());
+                    newTask.pushDB();
+                }
+                else System.out.println("Vide");
+
+
+                taskdialogue.dispose();
+
+            }
+        });
+
+
+
+
+
 
     }
 

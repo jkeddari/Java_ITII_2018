@@ -16,6 +16,8 @@
         <SOURCES />
       </library>
     </orderEntry>
-    <orderEntry type="library" name="sqlite-jdbc-3.21.0" level="project" />
+    <orderEntry type="library" name="sqlite-jdbc-3.21.0" level="application" />
+    <orderEntry type="library" name="commons-lang3-3.7" level="project" />
+    <orderEntry type="library" name="jxdatepicker-support-1.0" level="project" />
   </component>
 </module>
