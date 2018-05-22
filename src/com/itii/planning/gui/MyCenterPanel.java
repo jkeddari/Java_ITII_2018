@@ -4,22 +4,22 @@ import javax.swing.*;
 import java.awt.*;
 
 public class MyCenterPanel extends JPanel {
+    private MyListPanel list;
+    private MyMonthPanel months;
+    private MyWeekPanel weeks;
 
-    protected JButton b_supprimer;
 
     public MyCenterPanel(){
+
+        list = new MyListPanel();
+        months = new MyMonthPanel();
+        weeks = new MyWeekPanel();
+
 
         setLayout(new GridBagLayout());
         GridBagConstraints gbc=new GridBagConstraints();
 
 
-
-        
-        //MyListPanel PanelList =new MyListPanel();
-        //panneauSemaine.setBackground(Color.RED);
-
-        MyMonthPanel PanelMonth = new MyMonthPanel();
-        //panneauMois.setBackground(Color.BLUE);
 
         gbc.gridx=0;
         gbc.gridy=0;
@@ -30,8 +30,9 @@ public class MyCenterPanel extends JPanel {
 
         gbc.insets = new Insets(2,5,5,2);
 
-        add(new MyListPanel(),gbc);
+        add(list,gbc);
 
+        /*
         gbc.gridx=0;
         gbc.gridy=0;
 
@@ -42,7 +43,7 @@ public class MyCenterPanel extends JPanel {
         gbc.insets = new Insets(2,5,5,2);
 
         add(new MyMonthPanel(),gbc);
-
+        */
 
         gbc.gridx=4;
         gbc.weightx=0.5;

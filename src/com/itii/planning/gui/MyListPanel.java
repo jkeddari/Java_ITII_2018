@@ -9,7 +9,7 @@ import java.awt.*;
 import java.util.ArrayList;
 
 
-public class MyListPanel extends TaskPanel {
+public class MyListPanel extends TaskPanel{
 
     private JTable table;
 
@@ -46,14 +46,13 @@ public class MyListPanel extends TaskPanel {
 
         add(j,gbc);
 
+
     }
 
-    @Override
+
     protected void display() {
-        getData();
-        for (Object[] o : list_tasks) {
-            ((DefaultTableModel) table.getModel()).addRow(o);
-        }
+
+        for (Object[] o : getArrayData()) ((DefaultTableModel) table.getModel()).addRow(o);
     }
 
 }

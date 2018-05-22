@@ -29,14 +29,14 @@ public class MainWindow extends JFrame{
         setVisible(true);
         setDefaultCloseOperation(EXIT_ON_CLOSE); //Arret d'execution du programme lors de la fermeture de la fenêtre
 
-        mainPanel=new JPanel(new BorderLayout());
+        //mainPanel=new JPanel(new BorderLayout());
 
-        mainPanel.add(new MyTopMenu(),BorderLayout.NORTH);
-        mainPanel.add(new MyCenterPanel());
+        //mainPanel.add(new MyTopMenu(),BorderLayout.NORTH);
+        //mainPanel.add(new MyCenterPanel());
 
 
         setJMenuBar(new MyMenuBar());
-        setContentPane(mainPanel);
+        setContentPane(new MyMainPanel());
         this.validate();
         this.repaint();
 
