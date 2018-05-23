@@ -12,8 +12,8 @@ public class dbAccess {
     private static final String FIELD_DATE = "date";
     private static final String FIELD_DETAILS = "details";
     private static final String FIELD_STATE = "state";
-    Connection connection = null;
-    Statement statement = null;
+    private Connection connection = null;
+    private Statement statement = null;
 
     public dbAccess() {
 
@@ -41,7 +41,7 @@ public class dbAccess {
         try {
             ResultSet rs = statement.executeQuery("select * from " + TABLE_NAME);
             while (rs.next()) {
-                obj.add(new Object[]{rs.getString(FIELD_ID),rs.getString(FIELD_NAME),rs.getString(FIELD_DATE),rs.getString(FIELD_DETAILS)});
+                obj.add(new Object[]{rs.getString(FIELD_NAME),rs.getString(FIELD_DATE),rs.getString(FIELD_DETAILS),rs.getString(FIELD_ID)});
             }
         }
         catch (SQLException e) {
@@ -51,6 +51,7 @@ public class dbAccess {
     }
 
     public void writeDB(String name, String date, String comment){
+
         try {
             PreparedStatement stmt = connection.prepareStatement(
                     "insert into " + TABLE_NAME + " ( " + FIELD_NAME + ","
@@ -89,6 +90,59 @@ public class dbAccess {
             //System.out.println("fermeture de la connection à la base de données");
         } catch (SQLException e) {
             System.out.println("erreur lors de la fermeture de la connection");
+        }
+    }
+
+    public Object[] getObject(int id){
+
+        try {
+            PreparedStatement stmt = connection.prepareStatement(
+                    "select * from " +TABLE_NAME+ " WHERE "+FIELD_ID+" = ? ");
+            stmt.setInt(1, id);
+            ResultSet rs = stmt.executeQuery();
+            rs.next();
+
+
+            return new Object[]{rs.getString(FIELD_NAME),rs.getString(FIELD_DATE),rs.getString(FIELD_DETAILS),rs.getString(FIELD_ID), rs.getString(FIELD_STATE)};
+
+
+        }
+        catch (SQLException e) {
+            System.out.println("problème dans la duplication d'un élement dans la base");
+        }
+
+
+        return null;
+    }
+
+    public String getTopID(){
+        String id=new String();
+        try {
+            ResultSet rs = statement.executeQuery("select max(" +FIELD_ID+ ") as last from " + TABLE_NAME);
+
+            id=rs.getString("last");
+
+        }
+        catch (SQLException e) {
+            System.out.println("erreur à la lecture de la table");
+        }
+        return id;
+    }
+
+    public void alterDB(String name, String date, String comment, int id){
+        try {
+            PreparedStatement stmt = connection.prepareStatement(
+                    "update " + TABLE_NAME + " set " + FIELD_NAME + " = ?, "
+                            + FIELD_DATE + " = ?,  " + FIELD_DETAILS + " = ? where "+FIELD_ID+ "= ?");
+            stmt.setString(1, name);
+            stmt.setString(2, date);
+            stmt.setString(3, comment);
+            stmt.setInt(4, id);
+
+            stmt.executeUpdate();
+        }
+        catch (SQLException e) {
+            System.out.println("problème dans la modification d'une valeur dans la table.");
         }
     }
 }

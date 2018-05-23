@@ -1,17 +1,14 @@
-package com.itii.planning.gui;
-
-import com.itii.planning.db.dbAccess;
+package com.itii.planning.gui.MainWindow.TasksPanel;
 
 import javax.swing.*;
 import javax.swing.border.Border;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
-import java.util.ArrayList;
 
 
-public class MyListPanel extends TaskPanel{
 
-    private JTable table;
+public class MyListPanel extends TaskPanel {
+
 
     public MyListPanel(){
 
@@ -19,9 +16,17 @@ public class MyListPanel extends TaskPanel{
         GridBagConstraints gbc=new GridBagConstraints();
 
         //Titre des colonnes
-        String title[] = {"Nom de la tâche", "Date dûe", "Détails"};
-        DefaultTableModel tableModel = new DefaultTableModel(title, 0);
-        table = new JTable(tableModel);
+
+
+        table.getColumnModel().getColumn(3).setMaxWidth(0);
+        table.getColumnModel().getColumn(3).setMinWidth(0);
+        table.getColumnModel().getColumn(3).setPreferredWidth(0);
+
+        table.getColumnModel().getColumn(4).setMaxWidth(0);
+        table.getColumnModel().getColumn(4).setMinWidth(0);
+        table.getColumnModel().getColumn(4).setPreferredWidth(0);
+
+
 
 
         display(); //fill the table
@@ -47,12 +52,17 @@ public class MyListPanel extends TaskPanel{
         add(j,gbc);
 
 
+
+
+
     }
 
 
     protected void display() {
 
-        for (Object[] o : getArrayData()) ((DefaultTableModel) table.getModel()).addRow(o);
+        for (Object[] o : list_tasks) ((DefaultTableModel) table.getModel()).addRow(o);
+
+
     }
 
 }

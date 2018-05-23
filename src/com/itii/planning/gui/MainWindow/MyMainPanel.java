@@ -1,4 +1,4 @@
-package com.itii.planning.gui;
+package com.itii.planning.gui.MainWindow;
 
 import javax.swing.*;
 import java.awt.*;

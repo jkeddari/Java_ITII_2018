@@ -1,4 +1,4 @@
-package com.itii.planning.gui.task;
+package com.itii.planning.gui.newTaskDialog;
 
 import javax.swing.*;
 

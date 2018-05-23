@@ -1,9 +1,6 @@
-package com.itii.planning.gui.task;
-
-import org.jdatepicker.JDatePicker;
+package com.itii.planning.gui.newTaskDialog;
 
 import javax.swing.*;
-import java.awt.*;
 
 public class TaskDialogMainPanel extends JPanel {
 

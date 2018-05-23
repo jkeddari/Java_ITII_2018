@@ -1,22 +1,23 @@
-package com.itii.planning.gui;
+package com.itii.planning.gui.MainWindow.TasksPanel;
 
 import com.itii.planning.db.dbAccess;
+import com.itii.planning.gui.InterfaceButton;
+import com.itii.planning.gui.InterfaceTable;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
 
 /* Abstract pour ne pas pouvoir créer un objet de type TaskPanel*/
-public class TaskPanel extends JPanel implements InterfaceButton {
+public abstract class TaskPanel extends JPanel implements InterfaceButton, InterfaceTable {
 
-    private ArrayList<Object[]> list_tasks; /*Objet pour stocker les éléments de la base */
+    /*Objet pour stocker les éléments de la base */
 
     public TaskPanel(){
 
-        list_tasks = new ArrayList<Object[]>();
+
         dbAccess dbObj=new dbAccess();
-        list_tasks=dbObj.readDB();
+
 
         b_supprimer.addActionListener(new ActionListener() {
             @Override
@@ -27,9 +28,6 @@ public class TaskPanel extends JPanel implements InterfaceButton {
     }
 
 
-    public ArrayList<Object[]> getArrayData(){
-        return list_tasks;
-    }
 
 
 

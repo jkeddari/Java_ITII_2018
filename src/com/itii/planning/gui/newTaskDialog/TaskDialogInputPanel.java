@@ -1,24 +1,19 @@
-package com.itii.planning.gui.task;
+package com.itii.planning.gui.newTaskDialog;
 
-import com.itii.planning.gui.MainWindow;
-import com.itii.planning.gui.MyListPanel;
+
+import com.itii.planning.gui.InterfaceTable;
+import com.itii.planning.objTask.DateObject;
 import com.itii.planning.objTask.TaskObject;
 import org.jdatepicker.JDatePicker;
 import org.jdatepicker.ComponentFormatDefaults;
-
 import java.text.SimpleDateFormat;
-
-
-
-
 import java.util.Calendar;
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class TaskDialogInputPanel extends JPanel{
+public class TaskDialogInputPanel extends JPanel implements InterfaceTable {
 
     public TaskDialogInputPanel(JDialog taskdialogue){
 
@@ -109,11 +104,8 @@ public class TaskDialogInputPanel extends JPanel{
 
         JButton b_valider = new JButton("Valider");
         JButton b_annuler = new JButton("Annuler");
-
-
         grid.gridx=0;
         grid.gridy=5;
-        //grid.insets=null;
         grid.weightx=1;
         grid.weighty=1;
 
@@ -135,15 +127,14 @@ public class TaskDialogInputPanel extends JPanel{
             @Override
             public void actionPerformed(ActionEvent e) {
                 if(!name.getText().equals("") && !heure.getText().equals("") && !heure.getText().equals("") && !comment.getText().equals("") && !date.getFormattedTextField().getText().equals("")){
-                    String c_date=date.getFormattedTextField().getText()+" "+heure.getText()+":"+minute.getText();
-                    TaskObject newTask = new TaskObject(name.getText(),c_date,comment.getText());
+
+                    DateObject d = new DateObject(date.getFormattedTextField().getText()+" "+heure.getText()+":"+minute.getText());
+                    TaskObject newTask = new TaskObject(name.getText(),d.getDate(),comment.getText());
                     newTask.pushDB();
+                    newTask.pushTable();
+
                 }
-                else System.out.println("Vide");
-
-
                 taskdialogue.dispose();
-
             }
         });
 
