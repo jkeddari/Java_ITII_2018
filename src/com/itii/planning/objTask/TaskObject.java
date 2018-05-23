@@ -1,17 +1,30 @@
 package com.itii.planning.objTask;
 
 import com.itii.planning.db.dbAccess;
-import com.itii.planning.gui.InterfaceTable;
 
-import javax.swing.table.DefaultTableModel;
-import java.util.Date;
-
-public class TaskObject implements InterfaceTable {
+public class TaskObject {
     private String id;
     private String name;
     private String date;
     private String comment;
     private String status;
+
+
+    public String getName(){
+        return name;
+    }
+    public String getDate(){
+        return date;
+    }
+    public String getComment(){
+        return comment;
+    }
+    public String getStatus(){
+        return status;
+    }
+    public String getId(){
+        return id;
+    }
 
     public TaskObject(String name, String date, String comment){
         this.name=name;
@@ -45,25 +58,17 @@ public class TaskObject implements InterfaceTable {
         db.closeDb();
     }
 
-    public void alterTaskDB(int id){
+    public void updateTaskDB(int id){
         dbAccess db = new dbAccess();
         db.alterDB(name,date,comment,id);
-    }
-
-    public void pushTable(){
-        dbAccess db = new dbAccess();
-        list_tasks.add(new Object[]{name,date,comment, db.getTopID(),0});
-        ((DefaultTableModel) table.getModel()).addRow(new Object[]{name,date,comment,db.getTopID(),0});
         db.closeDb();
     }
 
-    public void alterTaskTable(){
-        list_tasks.set(table.getSelectedRow(),new Object[]{name,date,comment, id,0});
-        ((DefaultTableModel) table.getModel()).setValueAt(name,table.getSelectedRow(),0);
-        ((DefaultTableModel) table.getModel()).setValueAt(date,table.getSelectedRow(),1);
-        ((DefaultTableModel) table.getModel()).setValueAt(comment,table.getSelectedRow(),2);
+    public static void MarkTaskDB(int id){
+        dbAccess db = new dbAccess();
+        db.MarkDB(id);
+        db.closeDb();
     }
-
 
 
 
