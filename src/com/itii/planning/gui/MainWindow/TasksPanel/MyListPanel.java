@@ -8,6 +8,7 @@ import javax.swing.*;
 import javax.swing.event.TableModelEvent;
 import javax.swing.table.TableCellRenderer;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
 import java.awt.*;
 
 
@@ -92,8 +93,13 @@ public class MyListPanel extends TaskPanel {
     }
 
     public void updateTable(TaskObject o){
+
+
+        //TaskPanel.getListTasks().remove(table.getSelectedRow());
+        System.out.println(o.getStatus());
         TaskPanel.getListTasks().set(table.getSelectedRow(),new Object[]{o.getName(),o.getDate(),o.getComment(), o.getId(),o.getStatus()});
-        //tableModel.fireTableDataChanged();
+
+
         ((DefaultTableModel) table.getModel()).setValueAt(o.getName(),table.getSelectedRow(),0);
         ((DefaultTableModel) table.getModel()).setValueAt(o.getDate(),table.getSelectedRow(),1);
         ((DefaultTableModel) table.getModel()).setValueAt(o.getComment(),table.getSelectedRow(),2);
@@ -113,7 +119,8 @@ public class MyListPanel extends TaskPanel {
     public void editRow(){
         if(table.getSelectedRow() != -1) {
             int id = returnID(table.getSelectedRow());
-            new alterTaskDialog(id);
+            int status = returnSate(table.getSelectedRow());
+            new alterTaskDialog(id,status);
         }
     }
     public void cloneRow(){

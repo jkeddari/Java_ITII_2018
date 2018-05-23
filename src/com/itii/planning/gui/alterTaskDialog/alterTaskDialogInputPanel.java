@@ -31,7 +31,7 @@ public class alterTaskDialogInputPanel extends JPanel {
     /**********************************/
 
 
-    public alterTaskDialogInputPanel(JDialog atask, int id){
+    public alterTaskDialogInputPanel(JDialog atask, int id, int status){
 
         setLayout(new GridBagLayout());
         GridBagConstraints grid = new GridBagConstraints();
@@ -179,8 +179,9 @@ public class alterTaskDialogInputPanel extends JPanel {
             @Override
             public void actionPerformed(ActionEvent e) {
                 if(!name.getText().equals("") && !_txtFilterHour.getText().equals("") && !comment.getText().equals("") && !date.getFormattedTextField().getText().equals("")){
+
                     DateObject d = new DateObject(date.getFormattedTextField().getText()+" "+_txtFilterHour.getText()/*+":"+minute.getText()*/);
-                    TaskObject newTask = new TaskObject(name.getText(),d.getDate(),comment.getText());
+                    TaskObject newTask = new TaskObject(name.getText(),d.getDate(),comment.getText(),Integer.toString(id),Integer.toString(status));
                     newTask.updateTaskDB(id);
 
                     MyListPanel.GetMyListPanel().updateTable(newTask);

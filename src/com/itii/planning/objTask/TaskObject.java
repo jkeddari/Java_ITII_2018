@@ -45,12 +45,14 @@ public class TaskObject {
         this.date=date;
         this.comment=comment;
         this.id=id;
+        this.status=status;
     }
 
     public TaskObject(String name, DateObject date, String comment, String id, String status){
         this.name=name;
         this.date=date.getDate();
         this.comment=comment;
+        this.id=id;
         this.status=status;
     }
 
