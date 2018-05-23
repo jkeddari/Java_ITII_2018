@@ -6,6 +6,7 @@ import com.itii.planning.gui.MainWindow.TasksPanel.MyMonthPanel;
 import com.itii.planning.gui.MainWindow.TasksPanel.MyWeekPanel;
 import com.itii.planning.objTask.DateObject;
 import com.itii.planning.objTask.TaskObject;
+import com.itii.planning.objTask.alterHourFilter;
 import org.jdatepicker.ComponentFormatDefaults;
 import org.jdatepicker.JDatePicker;
 
@@ -21,13 +22,15 @@ public class alterTaskDialogInputPanel extends JPanel {
     /**********************************/
     // METHODE FORMAT QUI INTERDIT UN HORAIRE NON CONFORME //
     private JTextField _txtFilterHour;
-    protected JTextField getTxtFilterHour () {
+    protected JTextField getTxtFilterHour(){
         if (_txtFilterHour == null) {
             _txtFilterHour = new JTextField();
             _txtFilterHour.setDocument(new alterHourFilter());
+            _txtFilterHour.setBorder(BorderFactory.createLineBorder(Color.black));
         }
         return _txtFilterHour;
     }
+
     /**********************************/
 
 
@@ -82,7 +85,7 @@ public class alterTaskDialogInputPanel extends JPanel {
         date.getFormattedTextField().setText(oldDate.getYear()+"-"+oldDate.getMonth()+"-"+oldDate.getDay());
         add(date,grid);
 
-        /**********************************/
+        /*****************HORAIRE*****************/
         // FORMAT QUI INTERDIT UN HORRAIRE NON CONFORME //
         grid.gridx=0;
         grid.gridy=2;

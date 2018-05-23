@@ -2,7 +2,7 @@ package com.itii.planning.gui.newTaskDialog;
 
 
 import com.itii.planning.gui.MainWindow.TasksPanel.MyListPanel;
-import com.itii.planning.gui.alterTaskDialog.alterHourFilter;
+import com.itii.planning.objTask.alterHourFilter;
 import com.itii.planning.objTask.DateObject;
 import com.itii.planning.objTask.TaskObject;
 import org.jdatepicker.ComponentFormatDefaults;

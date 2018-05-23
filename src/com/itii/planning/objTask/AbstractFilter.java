@@ -1,4 +1,4 @@
-package com.itii.planning.gui.alterTaskDialog;
+package com.itii.planning.objTask;
 
 import javax.swing.text.BadLocationException;
 import javax.swing.text.PlainDocument;
