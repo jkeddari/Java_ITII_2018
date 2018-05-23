@@ -14,7 +14,7 @@ public class alterHourFilter extends AbstractFilter {
     }
 
     public void insertString(int offset, String str, AttributeSet attr) throws BadLocationException {
-        if (!isValid(str, "0123456789:", 8)) {
+        if (!isValid(str, "0123456789:", 5)) { /*5 pour HH:MM*/
             return;
         }
 

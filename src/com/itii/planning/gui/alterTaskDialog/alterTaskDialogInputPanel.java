@@ -17,6 +17,20 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
 public class alterTaskDialogInputPanel extends JPanel {
+
+    /**********************************/
+    // METHODE FORMAT QUI INTERDIT UN HORAIRE NON CONFORME //
+    private JTextField _txtFilterHour;
+    protected JTextField getTxtFilterHour () {
+        if (_txtFilterHour == null) {
+            _txtFilterHour = new JTextField();
+            _txtFilterHour.setDocument(new alterHourFilter());
+        }
+        return _txtFilterHour;
+    }
+    /**********************************/
+
+
     public alterTaskDialogInputPanel(JDialog atask, int id){
 
         setLayout(new GridBagLayout());
@@ -68,8 +82,25 @@ public class alterTaskDialogInputPanel extends JPanel {
         date.getFormattedTextField().setText(oldDate.getYear()+"-"+oldDate.getMonth()+"-"+oldDate.getDay());
         add(date,grid);
 
-        //Heure
+        /**********************************/
+        // FORMAT QUI INTERDIT UN HORRAIRE NON CONFORME //
         grid.gridx=0;
+        grid.gridy=2;
+        grid.weightx=0.2;
+        grid.weighty=1;
+        grid.fill=GridBagConstraints.NONE;
+        add(new JLabel("Heure : "),grid);
+
+
+        grid.gridx=1;
+        grid.fill=GridBagConstraints.HORIZONTAL;
+        _txtFilterHour = new JTextField();
+        _txtFilterHour.setDocument(new alterHourFilter());
+        add(getTxtFilterHour(),grid);
+
+        /**********************************/
+        //Heure  ANCIEN FORMAT
+        /*grid.gridx=0;
         grid.gridy=2;
         grid.weightx=0.2;
         grid.weighty=1;
@@ -81,10 +112,11 @@ public class alterTaskDialogInputPanel extends JPanel {
         grid.fill=GridBagConstraints.HORIZONTAL;
         JTextField heure= new JTextField();
         heure.setText(oldDate.getHours());
-        add(heure,grid);
+        add(heure,grid);*/
 
-        //Minute
-        grid.gridx=0;
+        //Minute -- ANCIEN FORMAT
+
+        /*grid.gridx=0;
         grid.gridy=3;
         grid.weightx=0.2;
         grid.weighty=1;
@@ -96,7 +128,7 @@ public class alterTaskDialogInputPanel extends JPanel {
         grid.fill=GridBagConstraints.HORIZONTAL;
         JTextField minute= new JTextField();
         minute.setText(oldDate.getMinute());
-        add(minute,grid);
+        add(minute,grid);*/
 
         /****************************************/
 
@@ -146,8 +178,8 @@ public class alterTaskDialogInputPanel extends JPanel {
         b_valider.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if(!name.getText().equals("") && !heure.getText().equals("") && !heure.getText().equals("") && !comment.getText().equals("") && !date.getFormattedTextField().getText().equals("")){
-                    DateObject d = new DateObject(date.getFormattedTextField().getText()+" "+heure.getText()+":"+minute.getText());
+                if(!name.getText().equals("") && !_txtFilterHour.getText().equals("") && !_txtFilterHour.getText().equals("") && !comment.getText().equals("") && !date.getFormattedTextField().getText().equals("")){
+                    DateObject d = new DateObject(date.getFormattedTextField().getText()+" "+_txtFilterHour.getText()/*+":"+minute.getText()*/);
                     TaskObject newTask = new TaskObject(name.getText(),d.getDate(),comment.getText());
                     newTask.updateTaskDB(id);
 
