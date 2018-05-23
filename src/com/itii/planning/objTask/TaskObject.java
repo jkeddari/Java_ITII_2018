@@ -7,7 +7,7 @@ public class TaskObject {
     private String name;
     private String date;
     private String comment;
-    private String status;
+    private String status="0";
 
 
     public String getName(){
@@ -27,12 +27,14 @@ public class TaskObject {
     }
 
     public TaskObject(String name, String date, String comment){
+        status="0";
         this.name=name;
         this.date=date;
         this.comment=comment;
     }
 
     public TaskObject(String name, DateObject date, String comment){
+        status="0";
         this.name=name;
         this.date=date.getDate();
         this.comment=comment;
@@ -67,6 +69,11 @@ public class TaskObject {
     public static void MarkTaskDB(int id){
         dbAccess db = new dbAccess();
         db.MarkDB(id);
+        db.closeDb();
+    }
+    public static void unMarkTaskDB(int id){
+        dbAccess db = new dbAccess();
+        db.unMarkDB(id);
         db.closeDb();
     }
 

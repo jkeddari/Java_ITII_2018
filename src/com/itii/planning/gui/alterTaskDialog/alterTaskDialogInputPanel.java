@@ -178,7 +178,7 @@ public class alterTaskDialogInputPanel extends JPanel {
         b_valider.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if(!name.getText().equals("") && !_txtFilterHour.getText().equals("") && !_txtFilterHour.getText().equals("") && !comment.getText().equals("") && !date.getFormattedTextField().getText().equals("")){
+                if(!name.getText().equals("") && !_txtFilterHour.getText().equals("") && !comment.getText().equals("") && !date.getFormattedTextField().getText().equals("")){
                     DateObject d = new DateObject(date.getFormattedTextField().getText()+" "+_txtFilterHour.getText()/*+":"+minute.getText()*/);
                     TaskObject newTask = new TaskObject(name.getText(),d.getDate(),comment.getText());
                     newTask.updateTaskDB(id);
