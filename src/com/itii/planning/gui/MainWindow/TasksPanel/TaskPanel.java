@@ -16,6 +16,10 @@ public abstract class TaskPanel extends JPanel {
         list_tasks.add(obj);
     }
 
+    public  Object[] getValueAt(int row){
+        return list_tasks.get(row);
+    }
+
     public static ArrayList<Object[]> getListTasks(){
         return list_tasks;
     }

@@ -183,6 +183,7 @@ public class TaskDialogInputPanel extends JPanel {
                     DateObject d = new DateObject(date.getFormattedTextField().getText()+" "+ _txtFilterHour.getText()/*+":"+minute.getText()*/);
                     TaskObject newTask = new TaskObject(name.getText(),d.getDate(),comment.getText());
                     newTask.pushDB();
+
                     MyListPanel.GetMyListPanel().pushTable(newTask);
 
                 }

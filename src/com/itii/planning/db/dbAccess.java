@@ -148,9 +148,19 @@ public class dbAccess {
 
     public void MarkDB(int id){
         try {
-            System.out.println(id);
             PreparedStatement stmt = connection.prepareStatement(
                     "update " + TABLE_NAME + " set " + FIELD_STATE + " = 1  where "+FIELD_ID+ "= ?");
+            stmt.setInt(1, id);
+            stmt.executeUpdate();
+        }
+        catch (SQLException e) {
+            System.out.println("problème dans le marquage d'une valeur dans la table.");
+        }
+    }
+    public void unMarkDB(int id){
+        try {
+            PreparedStatement stmt = connection.prepareStatement(
+                    "update " + TABLE_NAME + " set " + FIELD_STATE + " = 0  where "+FIELD_ID+ "= ?");
             stmt.setInt(1, id);
             stmt.executeUpdate();
         }

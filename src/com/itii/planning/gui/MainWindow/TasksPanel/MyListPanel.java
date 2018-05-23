@@ -5,8 +5,10 @@ import com.itii.planning.gui.alterTaskDialog.alterTaskDialog;
 import com.itii.planning.objTask.TaskObject;
 
 import javax.swing.*;
+import javax.swing.event.TableModelEvent;
 import javax.swing.table.TableCellRenderer;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
 import java.awt.*;
 
 
@@ -41,7 +43,7 @@ public class MyListPanel extends TaskPanel {
 
 
 
-        //table.setDefaultRenderer(Object.class, new MyTableCellRender());
+        table.setDefaultRenderer(Object.class, new MyTableCellRender());
 
         table.setSelectionBackground(Color.GRAY);
         table.setFillsViewportHeight(true);
@@ -83,13 +85,21 @@ public class MyListPanel extends TaskPanel {
 
     public void pushTable(TaskObject o){
         dbAccess db = new dbAccess();
-        TaskPanel.getListTasks().add(new Object[]{o.getName(),o.getDate(),o.getComment(), db.getTopID(),0});
+        TaskPanel.getListTasks().add(new Object[]{o.getName(),o.getDate(),o.getComment(), db.getTopID(),"0"});
+
         ((DefaultTableModel) table.getModel()).addRow(new Object[]{o.getName(),o.getDate(),o.getComment()});
+        System.out.println("OK");
         db.closeDb();
     }
 
     public void updateTable(TaskObject o){
-        TaskPanel.getListTasks().set(table.getSelectedRow(),new Object[]{o.getName(),o.getDate(),o.getComment(), o.getId(),0});
+
+
+        //TaskPanel.getListTasks().remove(table.getSelectedRow());
+        System.out.println(o.getStatus());
+        TaskPanel.getListTasks().set(table.getSelectedRow(),new Object[]{o.getName(),o.getDate(),o.getComment(), o.getId(),o.getStatus()});
+
+
         ((DefaultTableModel) table.getModel()).setValueAt(o.getName(),table.getSelectedRow(),0);
         ((DefaultTableModel) table.getModel()).setValueAt(o.getDate(),table.getSelectedRow(),1);
         ((DefaultTableModel) table.getModel()).setValueAt(o.getComment(),table.getSelectedRow(),2);
@@ -109,7 +119,8 @@ public class MyListPanel extends TaskPanel {
     public void editRow(){
         if(table.getSelectedRow() != -1) {
             int id = returnID(table.getSelectedRow());
-            new alterTaskDialog(id);
+            int status = returnSate(table.getSelectedRow());
+            new alterTaskDialog(id,status);
         }
     }
     public void cloneRow(){
@@ -133,10 +144,27 @@ public class MyListPanel extends TaskPanel {
     public void markRow(){
         if(table.getSelectedRow() != -1){
             int id = returnID(table.getSelectedRow());
-            TaskObject.MarkTaskDB(id);
+
+
+            Object[] o = getValueAt(table.getSelectedRow());
+
+
+            if(TaskPanel.returnSate(table.getSelectedRow())==0) {
+                TaskObject.MarkTaskDB(id);
+                o[4]="1";
+            }
+            else{
+                TaskObject.unMarkTaskDB(id);
+                o[4]="0";
+            }
+
+            TaskPanel.getListTasks().set(table.getSelectedRow(),o);
+            tableModel.fireTableDataChanged();
+
 
         }
     }
+
 
 }
 
