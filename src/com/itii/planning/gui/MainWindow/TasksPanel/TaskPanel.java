@@ -1,35 +1,42 @@
 package com.itii.planning.gui.MainWindow.TasksPanel;
 
 import com.itii.planning.db.dbAccess;
-import com.itii.planning.gui.InterfaceButton;
-import com.itii.planning.gui.InterfaceTable;
-
+import com.itii.planning.objTask.TaskObject;
 import javax.swing.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 /* Abstract pour ne pas pouvoir créer un objet de type TaskPanel*/
-public abstract class TaskPanel extends JPanel implements InterfaceButton, InterfaceTable {
+public abstract class TaskPanel extends JPanel {
 
-    /*Objet pour stocker les éléments de la base */
+    protected static ArrayList<Object[]> list_tasks=new dbAccess().readDB();
 
-    public TaskPanel(){
+    protected abstract void display();
 
-
-        dbAccess dbObj=new dbAccess();
-
-
-        b_supprimer.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-
-            }
-        });
+    public void addValue(Object[] obj){
+        list_tasks.add(obj);
     }
 
+    public static ArrayList<Object[]> getListTasks(){
+        return list_tasks;
+    }
 
+    public int returnID(int row){
+        Object[] o = list_tasks.get(row);
 
+        return Integer.parseInt((String)o[3]);
+    }
 
+    public static int returnSate(int row){
+        Object[] o = list_tasks.get(row);
 
+        return Integer.parseInt((String)o[4]);
+    }
+
+    public abstract void pushTable(TaskObject o);
+    public abstract void updateTable(TaskObject o);
+    public abstract void suppRow();
+    public abstract void editRow();
+    public abstract void cloneRow();
+    public abstract void markRow();
 
 }

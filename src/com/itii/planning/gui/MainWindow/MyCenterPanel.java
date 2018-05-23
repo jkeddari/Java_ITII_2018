@@ -1,7 +1,6 @@
 package com.itii.planning.gui.MainWindow;
 
 import com.itii.planning.gui.InterfaceButton;
-import com.itii.planning.gui.InterfaceTaskPanel;
 import com.itii.planning.gui.MainWindow.TasksPanel.MyListPanel;
 import com.itii.planning.gui.MainWindow.TasksPanel.MyMonthPanel;
 import com.itii.planning.gui.MainWindow.TasksPanel.MyWeekPanel;
@@ -11,15 +10,13 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class MyCenterPanel extends JPanel implements InterfaceButton, InterfaceTaskPanel {
+public class MyCenterPanel extends JPanel implements InterfaceButton {
 
 
     public MyCenterPanel(){
 
-
-
-        months.setVisible(false);
-        weeks.setVisible(false);
+        MyMonthPanel.GetMyMonthPanel().setVisible(false);
+        MyWeekPanel.GetMyWeekPanel().setVisible(false);
 
         setLayout(new GridBagLayout());
         GridBagConstraints gbc=new GridBagConstraints();
@@ -32,9 +29,9 @@ public class MyCenterPanel extends JPanel implements InterfaceButton, InterfaceT
         gbc.fill=GridBagConstraints.BOTH;
         gbc.insets = new Insets(2,5,5,2);
 
-        add(list,gbc);
-        add(months,gbc);
-        add(weeks,gbc);
+        add(MyListPanel.GetMyListPanel(),gbc);
+        add(MyMonthPanel.GetMyMonthPanel(),gbc);
+        add(MyWeekPanel.GetMyWeekPanel(),gbc);
 
 
         gbc.gridx=4;
@@ -49,19 +46,19 @@ public class MyCenterPanel extends JPanel implements InterfaceButton, InterfaceT
             @Override
             public void actionPerformed(ActionEvent e) {
                 if(choix_vue.getSelectedIndex()==0){
-                    months.setVisible(false);
-                    weeks.setVisible(false);
-                    list.setVisible(true);
+                    MyMonthPanel.GetMyMonthPanel().setVisible(false);
+                    MyWeekPanel.GetMyWeekPanel().setVisible(false);
+                    MyListPanel.GetMyListPanel().setVisible(true);
                 }
                 if(choix_vue.getSelectedIndex()==1){
-                    months.setVisible(false);
-                    weeks.setVisible(true);
-                    list.setVisible(false);
+                    MyMonthPanel.GetMyMonthPanel().setVisible(false);
+                    MyWeekPanel.GetMyWeekPanel().setVisible(true);
+                    MyListPanel.GetMyListPanel().setVisible(false);
                 }
                 if(choix_vue.getSelectedIndex()==2){
-                    months.setVisible(true);
-                    weeks.setVisible(false);
-                    list.setVisible(false);
+                    MyMonthPanel.GetMyMonthPanel().setVisible(true);
+                    MyWeekPanel.GetMyWeekPanel().setVisible(false);
+                    MyListPanel.GetMyListPanel().setVisible(false);
                 }
 
             }

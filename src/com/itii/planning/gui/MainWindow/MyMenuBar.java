@@ -1,19 +1,15 @@
 package com.itii.planning.gui.MainWindow;
 
-import com.itii.planning.db.dbAccess;
-import com.itii.planning.gui.InterfaceTable;
-import com.itii.planning.gui.InterfaceTaskPanel;
-import com.itii.planning.gui.alterTaskDialog.alterTaskDialog;
-import com.itii.planning.gui.newTaskDialog.TaskDialog;
+import com.itii.planning.gui.InterfaceButton;
+import com.itii.planning.gui.MainWindow.TasksPanel.MyListPanel;
+import com.itii.planning.gui.MainWindow.TasksPanel.MyMonthPanel;
+import com.itii.planning.gui.MainWindow.TasksPanel.MyWeekPanel;
 import com.itii.planning.objTask.ActionClass;
-import com.itii.planning.objTask.TaskObject;
-
 import javax.swing.*;
-import javax.swing.table.DefaultTableModel;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class MyMenuBar extends JMenuBar implements InterfaceTable, InterfaceTaskPanel {
+public class MyMenuBar extends JMenuBar implements InterfaceButton {
 
 
     public MyMenuBar(){
@@ -90,27 +86,34 @@ public class MyMenuBar extends JMenuBar implements InterfaceTable, InterfaceTask
         liste.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                months.setVisible(false);
-                weeks.setVisible(false);
-                list.setVisible(true);
+                MyMonthPanel.GetMyMonthPanel().setVisible(false);
+                MyWeekPanel.GetMyWeekPanel().setVisible(false);
+                MyListPanel.GetMyListPanel().setVisible(true);
+
+                choix_vue.setSelectedIndex(0);
+
             }
         });
 
         mois.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                months.setVisible(true);
-                weeks.setVisible(false);
-                list.setVisible(false);
+                MyMonthPanel.GetMyMonthPanel().setVisible(true);
+                MyWeekPanel.GetMyWeekPanel().setVisible(false);
+                MyListPanel.GetMyListPanel().setVisible(false);
+
+                choix_vue.setSelectedIndex(2);
             }
         });
 
         semaine.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                months.setVisible(false);
-                weeks.setVisible(true);
-                list.setVisible(false);
+                MyMonthPanel.GetMyMonthPanel().setVisible(false);
+                MyWeekPanel.GetMyWeekPanel().setVisible(true);
+                MyListPanel.GetMyListPanel().setVisible(false);
+
+                choix_vue.setSelectedIndex(1);
             }
         });
 

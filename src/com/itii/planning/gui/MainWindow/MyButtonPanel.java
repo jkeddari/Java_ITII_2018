@@ -1,7 +1,6 @@
 package com.itii.planning.gui.MainWindow;
 
 import com.itii.planning.gui.InterfaceButton;
-import com.itii.planning.gui.InterfaceTable;
 import com.itii.planning.objTask.ActionClass;
 import javax.swing.*;
 import java.awt.*;
@@ -9,7 +8,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Date;
 
-public class MyButtonPanel extends JPanel implements InterfaceButton, InterfaceTable {
+public class MyButtonPanel extends JPanel implements InterfaceButton {
 
     public MyButtonPanel() {
 

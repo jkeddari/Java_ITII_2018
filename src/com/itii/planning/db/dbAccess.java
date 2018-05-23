@@ -41,7 +41,7 @@ public class dbAccess {
         try {
             ResultSet rs = statement.executeQuery("select * from " + TABLE_NAME);
             while (rs.next()) {
-                obj.add(new Object[]{rs.getString(FIELD_NAME),rs.getString(FIELD_DATE),rs.getString(FIELD_DETAILS),rs.getString(FIELD_ID)});
+                obj.add(new Object[]{rs.getString(FIELD_NAME),rs.getString(FIELD_DATE),rs.getString(FIELD_DETAILS),rs.getString(FIELD_ID), rs.getString(FIELD_STATE)});
             }
         }
         catch (SQLException e) {
@@ -143,6 +143,19 @@ public class dbAccess {
         }
         catch (SQLException e) {
             System.out.println("problème dans la modification d'une valeur dans la table.");
+        }
+    }
+
+    public void MarkDB(int id){
+        try {
+            System.out.println(id);
+            PreparedStatement stmt = connection.prepareStatement(
+                    "update " + TABLE_NAME + " set " + FIELD_STATE + " = 1  where "+FIELD_ID+ "= ?");
+            stmt.setInt(1, id);
+            stmt.executeUpdate();
+        }
+        catch (SQLException e) {
+            System.out.println("problème dans le marquage d'une valeur dans la table.");
         }
     }
 }

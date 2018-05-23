@@ -1,11 +1,12 @@
 package com.itii.planning.gui.newTaskDialog;
 
 
-import com.itii.planning.gui.InterfaceTable;
+import com.itii.planning.gui.MainWindow.TasksPanel.MyListPanel;
 import com.itii.planning.objTask.DateObject;
 import com.itii.planning.objTask.TaskObject;
 import org.jdatepicker.JDatePicker;
 import org.jdatepicker.ComponentFormatDefaults;
+
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import javax.swing.*;
@@ -13,7 +14,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class TaskDialogInputPanel extends JPanel implements InterfaceTable {
+public class TaskDialogInputPanel extends JPanel {
 
     public TaskDialogInputPanel(JDialog taskdialogue){
 
@@ -67,7 +68,10 @@ public class TaskDialogInputPanel extends JPanel implements InterfaceTable {
         grid.gridx=1;
 
         grid.fill=GridBagConstraints.HORIZONTAL;
-        JTextField heure= new JTextField();
+        SimpleDateFormat hourFormat = new SimpleDateFormat("HH");
+        JFormattedTextField heure= new JFormattedTextField(hourFormat);
+
+
         add(heure,grid);
 
         //Minute
@@ -131,7 +135,7 @@ public class TaskDialogInputPanel extends JPanel implements InterfaceTable {
                     DateObject d = new DateObject(date.getFormattedTextField().getText()+" "+heure.getText()+":"+minute.getText());
                     TaskObject newTask = new TaskObject(name.getText(),d.getDate(),comment.getText());
                     newTask.pushDB();
-                    newTask.pushTable();
+                    MyListPanel.GetMyListPanel().pushTable(newTask);
 
                 }
                 taskdialogue.dispose();

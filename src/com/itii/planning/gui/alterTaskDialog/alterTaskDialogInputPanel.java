@@ -1,21 +1,22 @@
 package com.itii.planning.gui.alterTaskDialog;
 
 import com.itii.planning.db.dbAccess;
-import com.itii.planning.gui.InterfaceTable;
+import com.itii.planning.gui.MainWindow.TasksPanel.MyListPanel;
+import com.itii.planning.gui.MainWindow.TasksPanel.MyMonthPanel;
+import com.itii.planning.gui.MainWindow.TasksPanel.MyWeekPanel;
 import com.itii.planning.objTask.DateObject;
 import com.itii.planning.objTask.TaskObject;
 import org.jdatepicker.ComponentFormatDefaults;
 import org.jdatepicker.JDatePicker;
 
 import javax.swing.*;
-import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
-public class alterTaskDialogInputPanel extends JPanel implements InterfaceTable {
+public class alterTaskDialogInputPanel extends JPanel {
     public alterTaskDialogInputPanel(JDialog atask, int id){
 
         setLayout(new GridBagLayout());
@@ -146,12 +147,13 @@ public class alterTaskDialogInputPanel extends JPanel implements InterfaceTable 
             @Override
             public void actionPerformed(ActionEvent e) {
                 if(!name.getText().equals("") && !heure.getText().equals("") && !heure.getText().equals("") && !comment.getText().equals("") && !date.getFormattedTextField().getText().equals("")){
-
                     DateObject d = new DateObject(date.getFormattedTextField().getText()+" "+heure.getText()+":"+minute.getText());
                     TaskObject newTask = new TaskObject(name.getText(),d.getDate(),comment.getText());
-                    newTask.alterTaskDB(id);
-                    newTask.alterTaskTable();
+                    newTask.updateTaskDB(id);
 
+                    MyListPanel.GetMyListPanel().updateTable(newTask);
+                    MyMonthPanel.GetMyMonthPanel().updateTable(newTask);
+                    MyWeekPanel.GetMyWeekPanel().updateTable(newTask);
                 }
                 atask.dispose();
             }
