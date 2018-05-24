@@ -83,6 +83,13 @@ public class MyMenuBar extends JMenuBar implements InterfaceButton {
             }
         });
 
+        marquer.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                ActionClass.marquer();
+            }
+        });
+
         liste.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {

@@ -10,7 +10,12 @@ public class MyWeekPanel extends TaskPanel {
 
     private MyWeekPanel(){
         setBackground(Color.LIGHT_GRAY);
-        /* TODO */
+        /* TODO
+        * Faire un JTable comme ListPanel mais avec 7 colonnes représentant les jours de la semaine en cours,
+        * ajouter les Task dans la bonne colonne en fonction de leur date,
+        * utiliser la Class DateObject dans le package objTask pour découper un date en forme de string et extraire le
+        * jour,le mois et l'année
+        * */
     }
 
     public static MyWeekPanel GetMyWeekPanel(){

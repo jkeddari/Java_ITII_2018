@@ -87,8 +87,9 @@ public class MyListPanel extends TaskPanel {
         dbAccess db = new dbAccess();
         TaskPanel.getListTasks().add(new Object[]{o.getName(),o.getDate(),o.getComment(), db.getTopID(),"0"});
 
+        //((DefaultTableModel) table.getModel()).fireTableDataChanged();
         ((DefaultTableModel) table.getModel()).addRow(new Object[]{o.getName(),o.getDate(),o.getComment()});
-        System.out.println("OK");
+
         db.closeDb();
     }
 

@@ -19,7 +19,13 @@ public class MyMonthPanel extends TaskPanel {
     private MyMonthPanel() {
         setBackground(Color.red);
 
-        /* TODO */
+        /* TODO
+        * Faire un Layout BoxSizer, creer un nouveau panel qui representera les jours du mois en cours,
+        * Créer un bon nombre des ces sous panel en fonction du nombre de jours dans le mois à l'aide d'un boucle
+        * Ajouter ces sous panel dans le BoxSizer en tenant compte des decallage si le premier jour du mois n'est pas un lundi
+        *
+        * Les panel jours afficherons le noms des evenement correspondant à leur jours
+        * */
 
     }
 
