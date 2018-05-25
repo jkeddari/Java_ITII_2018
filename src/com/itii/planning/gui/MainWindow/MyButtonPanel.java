@@ -6,7 +6,7 @@ import com.itii.planning.gui.ActionClass;
 import javax.swing.*;
 import java.awt.*;
 
-import java.util.Date;
+import java.util.Calendar;
 
 class MyButtonPanel extends JPanel implements InterfaceButton {
 
@@ -15,10 +15,11 @@ class MyButtonPanel extends JPanel implements InterfaceButton {
         GridLayout ButtonGrid = new GridLayout(6, 1);
         setLayout(ButtonGrid);
 
-        Date d=new Date();
-        String s_date="Date du jour : "+(d.getYear()+1900)+"/"+(d.getMonth()+1)+"/"+(d.getDate());
-        JLabel lab_date = new JLabel(s_date);
 
+        Calendar d = Calendar.getInstance();
+
+        String s_date="Date du jour : "+(d.get(Calendar.YEAR)+"/"+(d.get(Calendar.MONTH)+1)+"/"+d.get(Calendar.DATE));
+        JLabel lab_date = new JLabel(s_date);
 
         add(b_creer);
         add(b_dupliquer);
