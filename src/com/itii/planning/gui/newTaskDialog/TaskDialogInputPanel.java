@@ -1,8 +1,9 @@
 package com.itii.planning.gui.newTaskDialog;
 
 
+import com.itii.planning.db.dbAccess;
 import com.itii.planning.gui.MainWindow.TasksPanel.MyListPanel;
-import com.itii.planning.objTask.alterHourFilter;
+import com.itii.planning.HourFilter.alterHourFilter;
 import com.itii.planning.objTask.DateObject;
 import com.itii.planning.objTask.TaskObject;
 import org.jdatepicker.ComponentFormatDefaults;
@@ -10,8 +11,6 @@ import org.jdatepicker.JDatePicker;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
@@ -20,7 +19,7 @@ public class TaskDialogInputPanel extends JPanel {
     /**********************************/
     // METHODE FORMAT QUI INTERDIT UN HORAIRE NON CONFORME //
     private JTextField _txtFilterHour;
-    protected JTextField getTxtFilterHour () {
+    private JTextField getTxtFilterHour () {
         if (_txtFilterHour == null) {
             _txtFilterHour = new JTextField();
             _txtFilterHour.setDocument(new alterHourFilter());
@@ -29,7 +28,7 @@ public class TaskDialogInputPanel extends JPanel {
     }
     /**********************************/
 
-    public TaskDialogInputPanel(JDialog taskdialogue){
+    TaskDialogInputPanel(JDialog taskdialogue){
 
         setLayout(new GridBagLayout());
         GridBagConstraints grid = new GridBagConstraints();
@@ -70,55 +69,8 @@ public class TaskDialogInputPanel extends JPanel {
         JDatePicker date = new JDatePicker(Calendar.getInstance());
         add(date,grid);
 
-        /************ HORAIRE ANCIEN FORMAT ***************/
-        //Heure ANCIEN FORMAT
-        /*grid.gridx=0;
-        grid.gridy=2;
-        grid.weightx=0.2;
-        grid.weighty=1;
-        grid.fill=GridBagConstraints.NONE;
-        add(new JLabel("Heure : "),grid);
 
-        grid.gridx=1;
-
-        grid.fill=GridBagConstraints.HORIZONTAL;
-        SimpleDateFormat hourFormat = new SimpleDateFormat("HH");
-        JFormattedTextField heure= new JFormattedTextField(hourFormat);
-
-
-        add(heure,grid);*/
-
-        //Minute ANCIEN FORMAT
-        /*grid.gridx=0;
-        grid.gridy=3;
-        grid.weightx=0.2;
-        grid.weighty=1;
-        grid.fill=GridBagConstraints.NONE;
-        add(new JLabel("Minute : "),grid);
-
-        grid.gridx=1;
-
-        grid.fill=GridBagConstraints.HORIZONTAL;
-        JTextField minute= new JTextField();
-        add(minute,grid);
-
-        //Commentaire
-        grid.gridx=0;
-        grid.gridy=4;
-        grid.insets = new Insets(0,0,0,5);
-        grid.weightx=0.1;
-        grid.weighty=5;
-        grid.fill=GridBagConstraints.NONE;
-        add(new JLabel("Commentaire : "),grid);
-
-        grid.gridx=1;
-        grid.fill=GridBagConstraints.HORIZONTAL;
-
-        JTextField comment = new JTextField();
-        add(comment,grid);*/
-        /************ FIN HORAIRE ANCIEN FORMAT ***************/
-
-        /**********************************/
+        /* *********************************/
         // FORMAT QUI INTERDIT UN HORRAIRE NON CONFORME //
         grid.gridx=0;
         grid.gridy=2;
@@ -132,9 +84,11 @@ public class TaskDialogInputPanel extends JPanel {
         grid.fill=GridBagConstraints.HORIZONTAL;
         _txtFilterHour = new JTextField();
         _txtFilterHour.setDocument(new alterHourFilter());
+
+        _txtFilterHour.setText("00:00");
         add(getTxtFilterHour(),grid);
 
-        /**********************************/
+        /* *********************************/
 
         //Commentaire
         grid.gridx=0;
@@ -167,28 +121,25 @@ public class TaskDialogInputPanel extends JPanel {
         grid.gridx=1;
         add(b_annuler,grid);
 
-        b_annuler.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
+        b_annuler.addActionListener(e -> taskdialogue.dispose());
+
+
+        b_valider.addActionListener(e -> {
+
+            if(!name.getText().equals("") && ! _txtFilterHour.getText().equals("")  && !date.getFormattedTextField().getText().equals("")){
+
+                DateObject d = new DateObject(date.getFormattedTextField().getText()+" "+ _txtFilterHour.getText()/*+":"+minute.getText()*/);
+                TaskObject newTask = new TaskObject(name.getText(),d.getDate(),comment.getText());
+                newTask.pushDB();
+                dbAccess db = new dbAccess();
+                newTask.setId(db.getTopID());
+                db.closeDb();
+                MyListPanel.GetMyListPanel().pushTable(newTask);
+
                 taskdialogue.dispose();
+
             }
-        });
 
-
-        b_valider.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                if(!name.getText().equals("") && ! _txtFilterHour.getText().equals("") && ! _txtFilterHour.getText().equals("") && !comment.getText().equals("") && !date.getFormattedTextField().getText().equals("")){
-
-                    DateObject d = new DateObject(date.getFormattedTextField().getText()+" "+ _txtFilterHour.getText()/*+":"+minute.getText()*/);
-                    TaskObject newTask = new TaskObject(name.getText(),d.getDate(),comment.getText());
-                    newTask.pushDB();
-
-                    MyListPanel.GetMyListPanel().pushTable(newTask);
-
-                }
-                taskdialogue.dispose();
-            }
         });
 
 

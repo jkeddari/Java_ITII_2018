@@ -1,5 +1,5 @@
 package com.itii.planning.gui.alterTaskDialog;
-import com.itii.planning.gui.newTaskDialog.TaskDialogMainPanel;
+
 
 import javax.swing.*;
 

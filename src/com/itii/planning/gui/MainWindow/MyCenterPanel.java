@@ -7,13 +7,12 @@ import com.itii.planning.gui.MainWindow.TasksPanel.MyWeekPanel;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-
-public class MyCenterPanel extends JPanel implements InterfaceButton {
 
 
-    public MyCenterPanel(){
+class MyCenterPanel extends JPanel implements InterfaceButton {
+
+
+    MyCenterPanel(){
 
         MyMonthPanel.GetMyMonthPanel().setVisible(false);
         MyWeekPanel.GetMyWeekPanel().setVisible(false);
@@ -42,26 +41,23 @@ public class MyCenterPanel extends JPanel implements InterfaceButton {
         add(new MyButtonPanel(),gbc);
 
 
-        choix_vue.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                if(choix_vue.getSelectedIndex()==0){
-                    MyMonthPanel.GetMyMonthPanel().setVisible(false);
-                    MyWeekPanel.GetMyWeekPanel().setVisible(false);
-                    MyListPanel.GetMyListPanel().setVisible(true);
-                }
-                if(choix_vue.getSelectedIndex()==1){
-                    MyMonthPanel.GetMyMonthPanel().setVisible(false);
-                    MyWeekPanel.GetMyWeekPanel().setVisible(true);
-                    MyListPanel.GetMyListPanel().setVisible(false);
-                }
-                if(choix_vue.getSelectedIndex()==2){
-                    MyMonthPanel.GetMyMonthPanel().setVisible(true);
-                    MyWeekPanel.GetMyWeekPanel().setVisible(false);
-                    MyListPanel.GetMyListPanel().setVisible(false);
-                }
-
+        choix_vue.addActionListener(e -> {
+            if(choix_vue.getSelectedIndex()==0){
+                MyMonthPanel.GetMyMonthPanel().setVisible(false);
+                MyWeekPanel.GetMyWeekPanel().setVisible(false);
+                MyListPanel.GetMyListPanel().setVisible(true);
             }
+            if(choix_vue.getSelectedIndex()==1){
+                MyMonthPanel.GetMyMonthPanel().setVisible(false);
+                MyWeekPanel.GetMyWeekPanel().setVisible(true);
+                MyListPanel.GetMyListPanel().setVisible(false);
+            }
+            if(choix_vue.getSelectedIndex()==2){
+                MyMonthPanel.GetMyMonthPanel().setVisible(true);
+                MyWeekPanel.GetMyWeekPanel().setVisible(false);
+                MyListPanel.GetMyListPanel().setVisible(false);
+            }
+
         });
 
 

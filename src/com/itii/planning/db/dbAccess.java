@@ -1,5 +1,7 @@
 package com.itii.planning.db;
 
+import com.itii.planning.objTask.TaskObject;
+
 import java.sql.*;
 import java.util.ArrayList;
 
@@ -36,21 +38,26 @@ public class dbAccess {
         }
     }
 
-    public ArrayList<Object[]> readDB(){
-        ArrayList<Object[]> obj = new ArrayList<Object[]>();
+    public ArrayList<TaskObject> readTaskDB(){
+        ArrayList<TaskObject> TableTask = new ArrayList<>();
         try {
             ResultSet rs = statement.executeQuery("select * from " + TABLE_NAME);
             while (rs.next()) {
-                obj.add(new Object[]{rs.getString(FIELD_NAME),rs.getString(FIELD_DATE),rs.getString(FIELD_DETAILS),rs.getString(FIELD_ID), rs.getString(FIELD_STATE)});
+                TableTask.add(new TaskObject(   rs.getString(FIELD_NAME),
+                                                rs.getString(FIELD_DATE),
+                                                rs.getString(FIELD_DETAILS),
+                                                rs.getString(FIELD_ID),
+                                                rs.getString(FIELD_STATE)
+                                            ));
             }
         }
         catch (SQLException e) {
             System.out.println("erreur à la lecture de la table");
         }
-        return obj;
+        return TableTask;
     }
 
-    public void writeDB(String name, String date, String comment){
+    public void writeDB(String name, String date, String comment, String status){
 
         try {
             PreparedStatement stmt = connection.prepareStatement(
@@ -60,7 +67,7 @@ public class dbAccess {
             stmt.setString(1, name);
             stmt.setString(2, date);
             stmt.setString(3, comment);
-            stmt.setString(4, "0");
+            stmt.setString(4, status);
             stmt.executeUpdate();
         }
         catch (SQLException e) {
@@ -93,30 +100,24 @@ public class dbAccess {
         }
     }
 
-    public Object[] getObject(int id){
 
+    public TaskObject getTask(int id){
         try {
             PreparedStatement stmt = connection.prepareStatement(
                     "select * from " +TABLE_NAME+ " WHERE "+FIELD_ID+" = ? ");
             stmt.setInt(1, id);
             ResultSet rs = stmt.executeQuery();
             rs.next();
-
-
-            return new Object[]{rs.getString(FIELD_NAME),rs.getString(FIELD_DATE),rs.getString(FIELD_DETAILS),rs.getString(FIELD_ID), rs.getString(FIELD_STATE)};
-
-
+            return new TaskObject(rs.getString(FIELD_NAME),rs.getString(FIELD_DATE),rs.getString(FIELD_DETAILS),rs.getString(FIELD_ID), rs.getString(FIELD_STATE));
         }
         catch (SQLException e) {
             System.out.println("problème dans la duplication d'un élement dans la base");
         }
-
-
         return null;
     }
 
     public String getTopID(){
-        String id=new String();
+        String id=null;
         try {
             ResultSet rs = statement.executeQuery("select max(" +FIELD_ID+ ") as last from " + TABLE_NAME);
 

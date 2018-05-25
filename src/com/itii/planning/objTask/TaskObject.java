@@ -7,7 +7,7 @@ public class TaskObject {
     private String name;
     private String date;
     private String comment;
-    private String status="0";
+    private String status;
 
 
     public String getName(){
@@ -26,6 +26,10 @@ public class TaskObject {
         return id;
     }
 
+    public void setId(String id){
+        this.id=id;
+    }
+
     public TaskObject(String name, String date, String comment){
         status="0";
         this.name=name;
@@ -33,12 +37,6 @@ public class TaskObject {
         this.comment=comment;
     }
 
-    public TaskObject(String name, DateObject date, String comment){
-        status="0";
-        this.name=name;
-        this.date=date.getDate();
-        this.comment=comment;
-    }
 
     public TaskObject(String name, String date, String comment, String id, String status){
         this.name=name;
@@ -48,18 +46,14 @@ public class TaskObject {
         this.status=status;
     }
 
-    public TaskObject(String name, DateObject date, String comment, String id, String status){
-        this.name=name;
-        this.date=date.getDate();
-        this.comment=comment;
-        this.id=id;
-        this.status=status;
-    }
-
     public void pushDB(){
         dbAccess db= new dbAccess();
-        db.writeDB(name,date,comment);
+        db.writeDB(name,date,comment,status);
         db.closeDb();
+    }
+
+    public Object[] getTaskObject(){
+        return new Object[]{name,date,comment};
     }
 
     public void updateTaskDB(int id){
@@ -68,15 +62,17 @@ public class TaskObject {
         db.closeDb();
     }
 
-    public static void MarkTaskDB(int id){
+    public void MarkTaskDB(int id){
         dbAccess db = new dbAccess();
         db.MarkDB(id);
         db.closeDb();
+        status="1";
     }
-    public static void unMarkTaskDB(int id){
+    public void unMarkTaskDB(int id){
         dbAccess db = new dbAccess();
         db.unMarkDB(id);
         db.closeDb();
+        status="0";
     }
 
 

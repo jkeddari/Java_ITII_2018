@@ -5,45 +5,33 @@ import com.itii.planning.gui.alterTaskDialog.alterTaskDialog;
 import com.itii.planning.objTask.TaskObject;
 
 import javax.swing.*;
-import javax.swing.event.TableModelEvent;
-import javax.swing.table.TableCellRenderer;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableModel;
 import java.awt.*;
 
 
 
 public class MyListPanel extends TaskPanel {
+
     private static MyListPanel m=null;
-
-    private String list_header[] = {"Nom de la tâche", "Date dûe","Commentaire"};
-    private DefaultTableModel tableModel = new DefaultTableModel(list_header, 0);
-
-    private JTable table=new JTable(tableModel);/* {
-        public Component prepareRenderer(TableCellRenderer renderer, int row, int col) {
-            Color[] colors = {Color.LIGHT_GRAY, new Color(240, 240, 240), new Color(220, 220, 120)};
-            Component c = super.prepareRenderer(renderer, row, col);
-
-            //System.out.println(row);
-            if (!isCellSelected(row, col) && TaskPanel.returnSate(row) == 1) {
-
-                c.setForeground(Color.RED);
-            }
-            c.setForeground(Color.BLACK);
-
-            return c;
-        };
-    };
-    */
+    private DefaultTableModel tableModel;
+    private JTable table;
 
 
     private MyListPanel(){
         setLayout(new GridBagLayout());
         GridBagConstraints gbc=new GridBagConstraints();
 
+        String[] list_header = {"Nom de la tâche", "Date dûe", "Commentaire"};
+        tableModel = new DefaultTableModel(list_header, 0){
+            @Override
+            public boolean isCellEditable(int row, int column) { //Class anonyme pour rendre les cellules non editables
+                return false;
+            }
+        };
+        table=new JTable(tableModel);
 
+        table.setDefaultRenderer(Object.class, new MyListTableCellRender());
 
-        table.setDefaultRenderer(Object.class, new MyTableCellRender());
 
         table.setSelectionBackground(Color.GRAY);
         table.setFillsViewportHeight(true);
@@ -62,10 +50,9 @@ public class MyListPanel extends TaskPanel {
 
         gbc.fill=GridBagConstraints.BOTH;
 
-
         add(j,gbc);
 
-        display(); //fill the table
+        display();
     }
 
     public static MyListPanel GetMyListPanel(){
@@ -75,35 +62,27 @@ public class MyListPanel extends TaskPanel {
 
 
     protected void display() {
-
-        for (Object[] o : list_tasks){
-
-            ((DefaultTableModel) table.getModel()).addRow(o);
+        for (TaskObject task : list_tasks){
+            ((DefaultTableModel) table.getModel()).addRow(task.getTaskObject());
         }
-
     }
 
-    public void pushTable(TaskObject o){
+    public void pushTable(TaskObject task){
         dbAccess db = new dbAccess();
-        TaskPanel.getListTasks().add(new Object[]{o.getName(),o.getDate(),o.getComment(), db.getTopID(),"0"});
 
-        //((DefaultTableModel) table.getModel()).fireTableDataChanged();
-        ((DefaultTableModel) table.getModel()).addRow(new Object[]{o.getName(),o.getDate(),o.getComment()});
+        TaskPanel.getListTasks().add(task);
+
+        ((DefaultTableModel) table.getModel()).addRow(task.getTaskObject());
 
         db.closeDb();
     }
 
-    public void updateTable(TaskObject o){
+    public void updateTable(TaskObject task){
+        TaskPanel.getListTasks().set(table.getSelectedRow(),task);
 
-
-        //TaskPanel.getListTasks().remove(table.getSelectedRow());
-        System.out.println(o.getStatus());
-        TaskPanel.getListTasks().set(table.getSelectedRow(),new Object[]{o.getName(),o.getDate(),o.getComment(), o.getId(),o.getStatus()});
-
-
-        ((DefaultTableModel) table.getModel()).setValueAt(o.getName(),table.getSelectedRow(),0);
-        ((DefaultTableModel) table.getModel()).setValueAt(o.getDate(),table.getSelectedRow(),1);
-        ((DefaultTableModel) table.getModel()).setValueAt(o.getComment(),table.getSelectedRow(),2);
+        tableModel.setValueAt(task.getName(),table.getSelectedRow(),0);
+        tableModel.setValueAt(task.getDate(),table.getSelectedRow(),1);
+        tableModel.setValueAt(task.getComment(),table.getSelectedRow(),2);
     }
 
     public void suppRow(){
@@ -129,16 +108,11 @@ public class MyListPanel extends TaskPanel {
             int id = returnID(table.getSelectedRow());
 
             dbAccess db = new dbAccess();
-            Object[] obj = db.getObject(id);
+            TaskObject task = db.getTask(id);
             db.closeDb();
 
-            String name = (String) obj[0];
-            String date = (String) obj[1];
-            String comment = (String) obj[2];
-
-            TaskObject t = new TaskObject(name, date, comment);
-            t.pushDB();
-            pushTable(t);
+            task.pushDB();
+            pushTable(task);
         }
     }
 
@@ -146,26 +120,18 @@ public class MyListPanel extends TaskPanel {
         if(table.getSelectedRow() != -1){
             int id = returnID(table.getSelectedRow());
 
-
-            Object[] o = getValueAt(table.getSelectedRow());
-
+            TaskObject task = getValueAt(table.getSelectedRow());
 
             if(TaskPanel.returnSate(table.getSelectedRow())==0) {
-                TaskObject.MarkTaskDB(id);
-                o[4]="1";
+                task.MarkTaskDB(id);
             }
             else{
-                TaskObject.unMarkTaskDB(id);
-                o[4]="0";
+                task.unMarkTaskDB(id);
             }
 
-            TaskPanel.getListTasks().set(table.getSelectedRow(),o);
+            TaskPanel.getListTasks().set(table.getSelectedRow(),task);
             tableModel.fireTableDataChanged();
-
-
         }
     }
-
-
 }
 

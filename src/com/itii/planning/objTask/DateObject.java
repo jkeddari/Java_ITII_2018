@@ -8,14 +8,6 @@ public class DateObject {
     private String minute;
 
 
-    public DateObject(String year, String month, String day, String hours, String minute){
-        this.year=year;
-        this.month=month;
-        this.day=day;
-        this.hours=hours;
-        this.minute=minute;
-    }
-
     public DateObject(String date){
         year=date.substring(0,4);
         month=date.substring(5,7);
@@ -33,16 +25,11 @@ public class DateObject {
     public String getDay(){
         return day;
     }
-    public String getHours(){
-        return hours;
-    }
-    public String getMinute(){
-        return minute;
-    }
+
 
 
     public String getDate(){
         return year+"-"+month+"-"+day+" "+hours+":"+minute;
     }
-
+    public String getTime(){return hours+":"+minute;}
 }

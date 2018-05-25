@@ -6,23 +6,23 @@ import com.itii.planning.gui.MainWindow.TasksPanel.MyMonthPanel;
 import com.itii.planning.gui.MainWindow.TasksPanel.MyWeekPanel;
 import com.itii.planning.objTask.DateObject;
 import com.itii.planning.objTask.TaskObject;
-import com.itii.planning.objTask.alterHourFilter;
+import com.itii.planning.HourFilter.alterHourFilter;
 import org.jdatepicker.ComponentFormatDefaults;
 import org.jdatepicker.JDatePicker;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
-public class alterTaskDialogInputPanel extends JPanel {
+class alterTaskDialogInputPanel extends JPanel {
 
     /**********************************/
     // METHODE FORMAT QUI INTERDIT UN HORAIRE NON CONFORME //
     private JTextField _txtFilterHour;
-    protected JTextField getTxtFilterHour(){
+
+    private JTextField getTxtFilterHour(){
         if (_txtFilterHour == null) {
             _txtFilterHour = new JTextField();
             _txtFilterHour.setDocument(new alterHourFilter());
@@ -34,7 +34,7 @@ public class alterTaskDialogInputPanel extends JPanel {
     /**********************************/
 
 
-    public alterTaskDialogInputPanel(JDialog atask, int id, int status){
+    alterTaskDialogInputPanel(JDialog atask, int id, int status){
 
         setLayout(new GridBagLayout());
         GridBagConstraints grid = new GridBagConstraints();
@@ -43,7 +43,7 @@ public class alterTaskDialogInputPanel extends JPanel {
 
 
         dbAccess db=new dbAccess();
-        Object[] o = db.getObject(id);
+        TaskObject task = db.getTask(id);
         db.closeDb();
 
         //Nom de tache
@@ -60,13 +60,13 @@ public class alterTaskDialogInputPanel extends JPanel {
         grid.fill=GridBagConstraints.HORIZONTAL;
 
         JTextField name = new JTextField();
-        name.setText((String)o[0]);
+        name.setText(task.getName());
         add(name,grid);
 
 
 
-        /************ D A T E **********/
-        DateObject oldDate= new DateObject((String)o[1]);
+        /* *********** D A T E **********/
+        DateObject oldDate= new DateObject(task.getDate());
 
         grid.gridx=0; grid.gridy=1;
         grid.weightx=0.2; grid.weighty=1;
@@ -85,7 +85,7 @@ public class alterTaskDialogInputPanel extends JPanel {
         date.getFormattedTextField().setText(oldDate.getYear()+"-"+oldDate.getMonth()+"-"+oldDate.getDay());
         add(date,grid);
 
-        /*****************HORAIRE*****************/
+        /* ****************HORAIRE*****************/
         // FORMAT QUI INTERDIT UN HORRAIRE NON CONFORME //
         grid.gridx=0;
         grid.gridy=2;
@@ -99,41 +99,9 @@ public class alterTaskDialogInputPanel extends JPanel {
         grid.fill=GridBagConstraints.HORIZONTAL;
         _txtFilterHour = new JTextField();
         _txtFilterHour.setDocument(new alterHourFilter());
+        _txtFilterHour.setText(new DateObject(task.getDate()).getTime());
         add(getTxtFilterHour(),grid);
 
-        /**********************************/
-        //Heure  ANCIEN FORMAT
-        /*grid.gridx=0;
-        grid.gridy=2;
-        grid.weightx=0.2;
-        grid.weighty=1;
-        grid.fill=GridBagConstraints.NONE;
-        add(new JLabel("Heure : "),grid);
-
-        grid.gridx=1;
-
-        grid.fill=GridBagConstraints.HORIZONTAL;
-        JTextField heure= new JTextField();
-        heure.setText(oldDate.getHours());
-        add(heure,grid);*/
-
-        //Minute -- ANCIEN FORMAT
-
-        /*grid.gridx=0;
-        grid.gridy=3;
-        grid.weightx=0.2;
-        grid.weighty=1;
-        grid.fill=GridBagConstraints.NONE;
-        add(new JLabel("Minute : "),grid);
-
-        grid.gridx=1;
-
-        grid.fill=GridBagConstraints.HORIZONTAL;
-        JTextField minute= new JTextField();
-        minute.setText(oldDate.getMinute());
-        add(minute,grid);*/
-
-        /****************************************/
 
         //Commentaire
         grid.gridx=0;
@@ -148,7 +116,7 @@ public class alterTaskDialogInputPanel extends JPanel {
         grid.fill=GridBagConstraints.HORIZONTAL;
 
         JTextField comment = new JTextField();
-        comment.setText((String) o[2]);
+        comment.setText(task.getComment());
         add(comment,grid);
 
 
@@ -160,7 +128,6 @@ public class alterTaskDialogInputPanel extends JPanel {
 
         grid.gridx=0;
         grid.gridy=5;
-        //grid.insets=null;
         grid.weightx=1;
         grid.weighty=1;
 
@@ -170,27 +137,20 @@ public class alterTaskDialogInputPanel extends JPanel {
         grid.gridx=1;
         add(b_annuler,grid);
 
-        b_annuler.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                atask.dispose();
-            }
-        });
+        b_annuler.addActionListener(e -> atask.dispose());
 
 
-        b_valider.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                if(!name.getText().equals("") && !_txtFilterHour.getText().equals("") && !comment.getText().equals("") && !date.getFormattedTextField().getText().equals("")){
+        b_valider.addActionListener(e -> {
+            if(!name.getText().equals("") && !_txtFilterHour.getText().equals("") && !date.getFormattedTextField().getText().equals("")){
 
-                    DateObject d = new DateObject(date.getFormattedTextField().getText()+" "+_txtFilterHour.getText()/*+":"+minute.getText()*/);
-                    TaskObject newTask = new TaskObject(name.getText(),d.getDate(),comment.getText(),Integer.toString(id),Integer.toString(status));
-                    newTask.updateTaskDB(id);
+                DateObject d = new DateObject(date.getFormattedTextField().getText()+" "+_txtFilterHour.getText()/*+":"+minute.getText()*/);
+                TaskObject newTask = new TaskObject(name.getText(),d.getDate(),comment.getText(),Integer.toString(id),Integer.toString(status));
+                newTask.updateTaskDB(id);
 
-                    MyListPanel.GetMyListPanel().updateTable(newTask);
-                    MyMonthPanel.GetMyMonthPanel().updateTable(newTask);
-                    MyWeekPanel.GetMyWeekPanel().updateTable(newTask);
-                }
+                MyListPanel.GetMyListPanel().updateTable(newTask);
+                MyMonthPanel.GetMyMonthPanel().updateTable(newTask);
+                MyWeekPanel.GetMyWeekPanel().updateTable(newTask);
+
                 atask.dispose();
             }
         });

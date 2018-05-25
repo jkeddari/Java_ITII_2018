@@ -8,32 +8,27 @@ import java.util.ArrayList;
 /* Abstract pour ne pas pouvoir créer un objet de type TaskPanel*/
 public abstract class TaskPanel extends JPanel {
 
-    protected static ArrayList<Object[]> list_tasks=new dbAccess().readDB();
+    static ArrayList<TaskObject> list_tasks=new dbAccess().readTaskDB();
 
     protected abstract void display();
 
-    public void addValue(Object[] obj){
-        list_tasks.add(obj);
-    }
-
-    public  Object[] getValueAt(int row){
+    TaskObject getValueAt(int row){
         return list_tasks.get(row);
     }
 
-    public static ArrayList<Object[]> getListTasks(){
+    static ArrayList<TaskObject> getListTasks(){
         return list_tasks;
     }
 
-    public int returnID(int row){
-        Object[] o = list_tasks.get(row);
-
-        return Integer.parseInt((String)o[3]);
+    int returnID(int row){
+        TaskObject task = list_tasks.get(row);
+        return Integer.parseInt(task.getId());
     }
 
-    public static int returnSate(int row){
-        Object[] o = list_tasks.get(row);
+    static int returnSate(int row){
+        TaskObject task = list_tasks.get(row);
 
-        return Integer.parseInt((String)o[4]);
+        return Integer.parseInt(task.getStatus());
     }
 
     public abstract void pushTable(TaskObject o);

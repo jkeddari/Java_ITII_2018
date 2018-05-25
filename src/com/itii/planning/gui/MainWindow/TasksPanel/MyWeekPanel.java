@@ -1,6 +1,5 @@
 package com.itii.planning.gui.MainWindow.TasksPanel;
 
-import com.itii.planning.gui.MainWindow.TasksPanel.TaskPanel;
 import com.itii.planning.objTask.TaskObject;
 
 import java.awt.*;
